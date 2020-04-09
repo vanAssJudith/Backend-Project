@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.DTOs;
+using AutoMapper;
 using Core.Models;
 using Core.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -14,10 +16,12 @@ namespace API.Controllers
     public class QuizController : ControllerBase
     {
         private readonly IQuizRepo quizRepo;
+        private readonly IMapper mapper;
 
-        public QuizController(IQuizRepo quizRepo)
+        public QuizController(IQuizRepo quizRepo, IMapper mapper)
         {
             this.quizRepo = quizRepo;
+            this.mapper = mapper;
         }
 
         // GET: api/Quiz
@@ -27,9 +31,10 @@ namespace API.Controllers
             try
             {
                 var quizzen = await quizRepo.GetQuizzenAsync();
-                            
 
-                return Ok(quizzen);
+                var quizzenDTO = mapper.Map<IEnumerable<QuizDTO>>(quizzen);
+
+                return Ok(quizzenDTO);
             }
             catch (Exception)
             {
@@ -41,7 +46,7 @@ namespace API.Controllers
 
         // GET: api/Quiz/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public string GetById(Guid id)
         {
             return "value";
         }
@@ -65,16 +70,25 @@ namespace API.Controllers
             }
         }
 
-        // PUT: api/Quiz/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
+            try
+            {
+                var quiz = await quizRepo.GetQuizAsync(id);
+
+                if (quiz == null)
+                    return NotFound();
+                await quizRepo.DeleteQuizAsync(quiz);
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Verwijderen mislukt");
+                throw ex;
+            }
         }
     }
 }

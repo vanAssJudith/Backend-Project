@@ -20,7 +20,10 @@ namespace Core.Repositories
 
         public async Task<IEnumerable<Quiz>> GetQuizzenAsync()
         {
-            return await context.Quizzen.ToListAsync();
+            return await context.Quizzen
+                .Include(q => q.Vragen)
+                .ThenInclude(v => v.Antwoorden)
+                .ToListAsync();
         }
         public async Task<Quiz> GetQuizAsync(Guid id)
         {
@@ -28,11 +31,11 @@ namespace Core.Repositories
         }
         public async Task<Quiz> AddQuizAsync(Quiz quiz)
         {
-                var result = context.Quizzen.AddAsync(quiz);
+                await context.Quizzen.AddAsync(quiz);
                 await context.SaveChangesAsync();
                 return quiz;
-            
         }
+
         public async Task AddQuizToGebruikerAsync(QuizGebruiker quizGebruiker)
         {
             await context.QuizGebruikers.AddAsync(quizGebruiker);
@@ -44,6 +47,12 @@ namespace Core.Repositories
         {
             context.QuizGebruikers.Update(quizGebruiker);
             await context.SaveChangesAsync();
+        }
+        public async Task DeleteQuizAsync(Quiz quiz)
+        {
+            context.Quizzen.Remove(quiz);
+            await context.SaveChangesAsync();
+            
         }
     }
 }

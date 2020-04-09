@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using AutoMapper;
 namespace API
 {
     public class Startup
@@ -34,6 +34,13 @@ namespace API
             services.AddDbContext<AstrologyQuizDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1.0", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "AstrologyQuizDB", Version = "v1.0" });
+            });
+
+            services.AddAutoMapper(typeof(Startup));
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +61,13 @@ namespace API
             {
                 endpoints.MapControllers();
             });
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "swagger"; //path naar de UI pagina: /swagger/index.html 
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "AstrologyQuizDB v1.0");
+            });
+
         }
     }
 }

@@ -1,25 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\00000000000000_CreateIdentitySchema.cs" />
-    <Compile Remove="Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
-    <Compile Remove="Migrations\20200408182007_Init.cs" />
-    <Compile Remove="Migrations\20200408182007_Init.Designer.cs" />
-    <Compile Remove="Migrations\20200408182106_test.cs" />
-    <Compile Remove="Migrations\20200408182106_test.Designer.cs" />
-    <Compile Remove="Migrations\20200408183259_AddUsers.cs" />
-    <Compile Remove="Migrations\20200408183259_AddUsers.Designer.cs" />
-    <Compile Remove="Migrations\20200408185442_Init.cs" />
-    <Compile Remove="Migrations\20200408185442_Init.Designer.cs" />
-    <Compile Remove="Migrations\20200408191421_UsersAdd.cs" />
-    <Compile Remove="Migrations\20200408191421_UsersAdd.Designer.cs" />
-    <Compile Remove="Migrations\20200409090337_ChangeTitelToOnderwerp.cs" />
-    <Compile Remove="Migrations\20200409090337_ChangeTitelToOnderwerp.Designer.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />

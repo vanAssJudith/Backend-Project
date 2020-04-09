@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Core.Migrations
 {
-    public partial class UsersAdd : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,9 +40,7 @@ namespace Core.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    Naam = table.Column<string>(nullable: true),
-                    Paswoord = table.Column<string>(nullable: true)
+                    Naam = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,7 +48,7 @@ namespace Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Moeilijkheidsgraad",
+                name: "Moeilijkheidsgraden",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -59,7 +57,7 @@ namespace Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Moeilijkheidsgraad", x => x.Id);
+                    table.PrimaryKey("PK_Moeilijkheidsgraden", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,8 +106,8 @@ namespace Core.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -160,8 +158,8 @@ namespace Core.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -180,7 +178,7 @@ namespace Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Titel = table.Column<string>(nullable: true),
+                    Onderwerp = table.Column<string>(nullable: true),
                     MoeilijkheidsgraadId = table.Column<int>(nullable: false),
                     Beschrijving = table.Column<string>(nullable: true)
                 },
@@ -188,9 +186,9 @@ namespace Core.Migrations
                 {
                     table.PrimaryKey("PK_Quizzen", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Quizzen_Moeilijkheidsgraad_MoeilijkheidsgraadId",
+                        name: "FK_Quizzen_Moeilijkheidsgraden_MoeilijkheidsgraadId",
                         column: x => x.MoeilijkheidsgraadId,
-                        principalTable: "Moeilijkheidsgraad",
+                        principalTable: "Moeilijkheidsgraden",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -223,7 +221,7 @@ namespace Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vraag",
+                name: "Vragen",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -236,9 +234,9 @@ namespace Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vraag", x => x.Id);
+                    table.PrimaryKey("PK_Vragen", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vraag_Quizzen_QuizId1",
+                        name: "FK_Vragen_Quizzen_QuizId1",
                         column: x => x.QuizId1,
                         principalTable: "Quizzen",
                         principalColumn: "Id",
@@ -246,7 +244,7 @@ namespace Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Antwoord",
+                name: "Antwoorden",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -258,17 +256,17 @@ namespace Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Antwoord", x => x.Id);
+                    table.PrimaryKey("PK_Antwoorden", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Antwoord_Vraag_VraagId",
+                        name: "FK_Antwoorden_Vragen_VraagId",
                         column: x => x.VraagId,
-                        principalTable: "Vraag",
+                        principalTable: "Vragen",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuizGebruikerAntwoord",
+                name: "QuizGebruikerAntwoorden",
                 columns: table => new
                 {
                     QuizGebruikerId = table.Column<Guid>(nullable: false),
@@ -276,15 +274,15 @@ namespace Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuizGebruikerAntwoord", x => new { x.QuizGebruikerId, x.AntwoordId });
+                    table.PrimaryKey("PK_QuizGebruikerAntwoorden", x => new { x.QuizGebruikerId, x.AntwoordId });
                     table.ForeignKey(
-                        name: "FK_QuizGebruikerAntwoord_Antwoord_AntwoordId",
+                        name: "FK_QuizGebruikerAntwoorden_Antwoorden_AntwoordId",
                         column: x => x.AntwoordId,
-                        principalTable: "Antwoord",
+                        principalTable: "Antwoorden",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QuizGebruikerAntwoord_QuizGebruikers_QuizGebruikerId",
+                        name: "FK_QuizGebruikerAntwoorden_QuizGebruikers_QuizGebruikerId",
                         column: x => x.QuizGebruikerId,
                         principalTable: "QuizGebruikers",
                         principalColumn: "Id",
@@ -293,11 +291,11 @@ namespace Core.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "Naam", "Paswoord" },
-                values: new object[] { "8e23ae18-a2a8-4609-acbe-3e387ea671bf", 0, "1a2cf89e-729a-4664-aef3-5546098fba6d", "Gebruiker", "Judith.van.ass@student.howest.be", false, false, null, null, null, "MijnP@sw00rd", null, false, "5ef10d8b-924d-4452-a827-17b76cceb147", false, "Judithvanass", "Judith van Ass", null });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Naam", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "1425231e-6b99-4b9a-9ff4-664b3be22493", 0, "7e6bc43e-ee46-42fa-aad2-b639eb0e2659", "Judith.van.ass@student.howest.be", false, false, null, "Judith van Ass", null, null, null, null, false, "7280c850-d26b-4519-9919-740fcdf8eb0c", false, "Judithvanass" });
 
             migrationBuilder.InsertData(
-                table: "Moeilijkheidsgraad",
+                table: "Moeilijkheidsgraden",
                 columns: new[] { "Id", "Titel" },
                 values: new object[,]
                 {
@@ -307,8 +305,8 @@ namespace Core.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Antwoord_VraagId",
-                table: "Antwoord",
+                name: "IX_Antwoorden_VraagId",
+                table: "Antwoorden",
                 column: "VraagId");
 
             migrationBuilder.CreateIndex(
@@ -356,8 +354,8 @@ namespace Core.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuizGebruikerAntwoord_AntwoordId",
-                table: "QuizGebruikerAntwoord",
+                name: "IX_QuizGebruikerAntwoorden_AntwoordId",
+                table: "QuizGebruikerAntwoorden",
                 column: "AntwoordId");
 
             migrationBuilder.CreateIndex(
@@ -376,8 +374,8 @@ namespace Core.Migrations
                 column: "MoeilijkheidsgraadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vraag_QuizId1",
-                table: "Vraag",
+                name: "IX_Vragen_QuizId1",
+                table: "Vragen",
                 column: "QuizId1");
         }
 
@@ -399,19 +397,19 @@ namespace Core.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "QuizGebruikerAntwoord");
+                name: "QuizGebruikerAntwoorden");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Antwoord");
+                name: "Antwoorden");
 
             migrationBuilder.DropTable(
                 name: "QuizGebruikers");
 
             migrationBuilder.DropTable(
-                name: "Vraag");
+                name: "Vragen");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
@@ -420,7 +418,7 @@ namespace Core.Migrations
                 name: "Quizzen");
 
             migrationBuilder.DropTable(
-                name: "Moeilijkheidsgraad");
+                name: "Moeilijkheidsgraden");
         }
     }
 }

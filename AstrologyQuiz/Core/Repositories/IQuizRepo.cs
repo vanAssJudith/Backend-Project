@@ -12,5 +12,6 @@ namespace Core.Repositories
         Task<Quiz> GetQuizAsync(Guid id);
         Task<IEnumerable<Quiz>> GetQuizzenAsync();
         Task UpdateQuizGebruikerAsync(QuizGebruiker quizGebruiker);
+        Task DeleteQuizAsync(Quiz quiz);
     }
 }

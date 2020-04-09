@@ -1,0 +1,30 @@
+﻿using API.DTOs;
+using AutoMapper;
+using Core.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace API.Mapping
+{
+    public class QuizProfile:Profile
+    {
+        public QuizProfile()
+        {
+            // domain clas to dto
+            CreateMap<Antwoord, AntwoordDTO>();
+            CreateMap<Quiz, QuizDTO>();
+            CreateMap<Vraag, VraagDTO>();
+
+            // dto to domain class
+            CreateMap<AntwoordDTO, Antwoord>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<QuizDTO, Quiz>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<VraagDTO, Vraag>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+
+        }
+    }
+}

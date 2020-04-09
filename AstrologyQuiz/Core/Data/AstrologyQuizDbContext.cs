@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Data
 {
-    public class AstrologyQuizDbContext : IdentityDbContext
+    public class AstrologyQuizDbContext : IdentityDbContext<Gebruiker>
     {
         public AstrologyQuizDbContext(DbContextOptions<AstrologyQuizDbContext> options)
             : base(options)
@@ -17,6 +17,12 @@ namespace Core.Data
 
         public virtual DbSet<Quiz> Quizzen { get; set; }
         public virtual DbSet<QuizGebruiker> QuizGebruikers { get; set; }
+        public virtual DbSet<Antwoord> Antwoorden { get; set; }
+        public virtual DbSet<Gebruiker> Gebruikers { get; set; }
+        public virtual DbSet<Moeilijkheidsgraad> Moeilijkheidsgraden { get; set; }
+        public virtual DbSet<QuizGebruikerAntwoord> QuizGebruikerAntwoorden { get; set; }
+        public virtual DbSet<Vraag> Vragen { get; set; }
+
 
         // fluent api 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
