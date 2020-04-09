@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Models;
+using Core.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +13,30 @@ namespace API.Controllers
     [ApiController]
     public class QuizController : ControllerBase
     {
+        private readonly IQuizRepo quizRepo;
+
+        public QuizController(IQuizRepo quizRepo)
+        {
+            this.quizRepo = quizRepo;
+        }
+
         // GET: api/Quiz
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var quizzen = await quizRepo.GetQuizzenAsync();
+                            
+
+                return Ok(quizzen);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+          
         }
 
         // GET: api/Quiz/5
@@ -27,8 +48,21 @@ namespace API.Controllers
 
         // POST: api/Quiz
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] Quiz quiz)
         {
+            try
+            {
+                
+                //hebben we hierbij een mapper nodig?
+                await quizRepo.AddQuizAsync(quiz);
+                return Ok();
+                    //return CreatedAtAction("Get", new { id = quiz.Id }, quiz); ;
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Toevoegen mislukt");
+                throw ex;
+            }
         }
 
         // PUT: api/Quiz/5

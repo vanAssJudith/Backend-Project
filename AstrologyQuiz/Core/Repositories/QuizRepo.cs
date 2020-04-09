@@ -1,7 +1,9 @@
 ﻿using Core.Data;
 using Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,21 +18,22 @@ namespace Core.Repositories
             this.context = context;
         }
 
-        public async Task<Quiz> AddQuiz(Quiz quiz)
+        public async Task<IEnumerable<Quiz>> GetQuizzenAsync()
         {
-            try
-            {
+            return await context.Quizzen.ToListAsync();
+        }
+        public async Task<Quiz> GetQuizAsync(Guid id)
+        {
+            return await context.Quizzen.SingleOrDefaultAsync(q => q.Id == id);
+        }
+        public async Task<Quiz> AddQuizAsync(Quiz quiz)
+        {
                 var result = context.Quizzen.AddAsync(quiz);
                 await context.SaveChangesAsync();
                 return quiz;
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine(exc.InnerException.Message);
-                throw exc;
-            }
+            
         }
-        public async Task AddQuizToGebruiker(QuizGebruiker quizGebruiker)
+        public async Task AddQuizToGebruikerAsync(QuizGebruiker quizGebruiker)
         {
             await context.QuizGebruikers.AddAsync(quizGebruiker);
             await context.SaveChangesAsync();
