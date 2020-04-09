@@ -18,11 +18,18 @@ namespace Core.Data
         public virtual DbSet<Quiz> Quizzen { get; set; }
         public virtual DbSet<QuizGebruiker> QuizGebruikers { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        // fluent api 
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelbuilder);
 
-            builder.Seed();
+            modelbuilder.Seed();
+
+            modelbuilder.Entity<QuizGebruikerAntwoord>(entity =>
+            {
+                entity.HasKey(e => new { e.QuizGebruikerId, e.AntwoordId });
+
+            });
         }
     }
 }

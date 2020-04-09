@@ -19,7 +19,7 @@ namespace Core.Data
                     UserName = "Judithvanass",
                     Naam = "Judith van Ass",
                     Email = "Judith.van.ass@student.howest.be",
-                    PasswordHash = "MijnP@sw00rd",
+                    //PasswordHash = "MijnP@sw00rd1",
                 });
 
             modelBuilder.Entity<Moeilijkheidsgraad>().HasData(
@@ -51,12 +51,11 @@ namespace Core.Data
                 {
                     Id = Guid.NewGuid().ToString(),
                     UserName = "Docent@MCT",
-                    Naam = "JohanVanHowest",
-                    Email = "Docent@1",
-
+                    Naam = "JohanVan@Howest",
+                    Email = "Docent@1"
                 };
 
-                var userResult = await userMgr.CreateAsync(user, "Docent@MCT");
+                var userResult = await userMgr.CreateAsync(user, "Docent@1");
                 var roleResult = await userMgr.AddToRoleAsync(user, "Admin");
 
                 if (!userResult.Succeeded || !roleResult.Succeeded)

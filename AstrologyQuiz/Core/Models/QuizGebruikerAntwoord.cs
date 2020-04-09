@@ -6,7 +6,10 @@ namespace Core.Models
 {
     public class QuizGebruikerAntwoord
     {
-        public int QuizGebruikerId { get; set; }
-        public int AntwoordId { get; set; }
+        public Guid QuizGebruikerId { get; set; }
+        public Guid AntwoordId { get; set; }
+
+        public QuizGebruiker QuizGebruiker { get; set; }
+        public Antwoord Antwoord { get; set; }
     }
 }

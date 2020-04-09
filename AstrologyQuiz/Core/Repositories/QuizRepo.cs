@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    public class QuizRepo
+    public class QuizRepo : IQuizRepo
     {
         private readonly AstrologyQuizDbContext context;
 
@@ -27,18 +27,20 @@ namespace Core.Repositories
             catch (Exception exc)
             {
                 Console.WriteLine(exc.InnerException.Message);
-                return null;
+                throw exc;
             }
         }
-        public async Task AddQuizToGebruiker(int quizId, int gebruikerId)
+        public async Task AddQuizToGebruiker(QuizGebruiker quizGebruiker)
         {
-            await context.QuizGebruikers.AddAsync(new QuizGebruiker
-            {
-                QuizId = quizId,
-                GebruikerId = gebruikerId
-            });
+            await context.QuizGebruikers.AddAsync(quizGebruiker);
+            await context.SaveChangesAsync();
 
         }
 
+        public async Task UpdateQuizGebruikerAsync(QuizGebruiker quizGebruiker)
+        {
+            context.QuizGebruikers.Update(quizGebruiker);
+            await context.SaveChangesAsync();
+        }
     }
 }
