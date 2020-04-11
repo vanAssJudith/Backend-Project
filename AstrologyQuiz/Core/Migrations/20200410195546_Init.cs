@@ -229,18 +229,17 @@ namespace Core.Migrations
                     Beschrijving = table.Column<string>(nullable: true),
                     AfbeeldingURL = table.Column<string>(nullable: true),
                     Score = table.Column<int>(nullable: false),
-                    QuizId = table.Column<int>(nullable: false),
-                    QuizId1 = table.Column<Guid>(nullable: true)
+                    QuizId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vragen", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vragen_Quizzen_QuizId1",
-                        column: x => x.QuizId1,
+                        name: "FK_Vragen_Quizzen_QuizId",
+                        column: x => x.QuizId,
                         principalTable: "Quizzen",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -286,13 +285,13 @@ namespace Core.Migrations
                         column: x => x.QuizGebruikerId,
                         principalTable: "QuizGebruikers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Naam", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1425231e-6b99-4b9a-9ff4-664b3be22493", 0, "7e6bc43e-ee46-42fa-aad2-b639eb0e2659", "Judith.van.ass@student.howest.be", false, false, null, "Judith van Ass", null, null, null, null, false, "7280c850-d26b-4519-9919-740fcdf8eb0c", false, "Judithvanass" });
+                values: new object[] { "47a23ead-7712-41f1-867d-7f176e7f8dcd", 0, "e694486d-c79d-40f5-982e-05dcbae41b62", "Judith.van.ass@student.howest.be", false, false, null, "Judith van Ass", null, null, null, null, false, "71efdd7e-1e5f-46c7-a219-8f051a1ed029", false, "Judithvanass" });
 
             migrationBuilder.InsertData(
                 table: "Moeilijkheidsgraden",
@@ -374,9 +373,9 @@ namespace Core.Migrations
                 column: "MoeilijkheidsgraadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vragen_QuizId1",
+                name: "IX_Vragen_QuizId",
                 table: "Vragen",
-                column: "QuizId1");
+                column: "QuizId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

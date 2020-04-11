@@ -5,13 +5,10 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    public interface IQuizRepo
+    public interface IQuizRepo:IGenericRepo<Quiz>
     {
-        Task<Quiz> AddQuizAsync(Quiz quiz);
-        Task AddQuizToGebruikerAsync(QuizGebruiker quizGebruiker);
-        Task<Quiz> GetQuizAsync(Guid id);
-        Task<IEnumerable<Quiz>> GetQuizzenAsync();
-        Task UpdateQuizGebruikerAsync(QuizGebruiker quizGebruiker);
-        Task DeleteQuizAsync(Quiz quiz);
+      
+        void AddQuizToGebruiker(QuizGebruiker quizGebruiker);
+      
     }
 }

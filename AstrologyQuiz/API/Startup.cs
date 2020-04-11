@@ -29,7 +29,10 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            // TODO: IoC container vullen met nieuwe repo's
             services.AddScoped<IQuizRepo, QuizRepo>();
+            services.AddScoped<IAntwoordRepo, AntwoordRepo>();
+            services.AddScoped<IVraagRepo, VraagRepo>();
 
             services.AddDbContext<AstrologyQuizDbContext>(options =>
                 options.UseSqlServer(
@@ -38,7 +41,7 @@ namespace API
             {
                 c.SwaggerDoc("v1.0", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "AstrologyQuizDB", Version = "v1.0" });
             });
-
+            // TODO: Automapper implementer (2 dependencies)
             services.AddAutoMapper(typeof(Startup));
         
         }

@@ -14,6 +14,6 @@ namespace API.DTOs
         public bool IsCorrect { get; set; }
         public string Uitleg { get; set; }
        
-         
+
     }
 }

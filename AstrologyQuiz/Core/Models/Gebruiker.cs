@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Core.Models
@@ -10,7 +11,14 @@ namespace Core.Models
         public string Naam { get; set; }
         //public string Paswoord { get; set; }
 
-        public virtual ICollection<IdentityUserRole<string>> Roles { get; } = new List<IdentityUserRole<string>>();
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
+        public virtual ICollection<QuizGebruiker> QuizGebruikers { get; set; }
+
+        public Gebruiker()
+        {
+            Roles = new Collection<IdentityUserRole<string>>();
+            QuizGebruikers = new Collection<QuizGebruiker>();
+        }
     }
 }
 

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace API.DTOs
 {
-    public class QuizDTO
+    public class SaveQuizDTO
     {
         public Guid Id { get; set; }
         [Required]
         public string Onderwerp { get; set; }
-        public string Moeilijkheidsgraad { get; set; }
+        [Required]
+        public int MoeilijkheidsgraadId { get; set; }
+        [Required]
         public string Beschrijving { get; set; }
+
         public virtual ICollection<VraagDTO> Vragen { get; set; }
     }
 }

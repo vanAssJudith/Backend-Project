@@ -12,7 +12,7 @@ namespace Core.Models
         public string Beschrijving { get; set; }
         public string AfbeeldingURL { get; set; }
         public int Score { get; set; }
-        public int QuizId { get; set; }
+        public Guid QuizId { get; set; }
 
         public virtual ICollection<Antwoord> Antwoorden { get; set; }
 

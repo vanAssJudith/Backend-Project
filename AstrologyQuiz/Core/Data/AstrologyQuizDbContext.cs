@@ -34,8 +34,9 @@ namespace Core.Data
             modelbuilder.Entity<QuizGebruikerAntwoord>(entity =>
             {
                 entity.HasKey(e => new { e.QuizGebruikerId, e.AntwoordId });
-
+                entity.HasOne(e => e.QuizGebruiker).WithMany(q => q.QuizGebruikerAntwoorden).OnDelete(DeleteBehavior.Restrict);
             });
+
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using AutoMapper;
-using Core.Data;
 using Core.Models;
 using Core.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -15,30 +14,30 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuizController : ControllerBase
+    public class VraagController : ControllerBase
     {
-        private readonly IQuizRepo quizRepo;
+        private readonly IVraagRepo vraagRepo;
         private readonly IMapper mapper;
         private readonly ILogger logger;
 
-        public QuizController(IQuizRepo quizRepo, IMapper mapper, ILogger<QuizController> logger)
+        public VraagController(IVraagRepo vraagRepo, IMapper mapper, ILogger<VraagController> logger)
         {
-            this.quizRepo = quizRepo;
+            this.vraagRepo = vraagRepo;
             this.mapper = mapper;
             this.logger = logger;
         }
 
-        // GET: api/Quiz
+        // GET: api/Vraag
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             try
             {
-                var quizzen = await quizRepo.GetAllAsync();
+                var vragen = await vraagRepo.GetAllAsync();
 
-                var quizzenDTO = mapper.Map<IEnumerable<QuizDTO>>(quizzen);
+                var vragenDTO = mapper.Map<IEnumerable<VraagDTO>>(vragen);
 
-                return Ok(quizzenDTO);
+                return Ok(vragenDTO);
             }
             catch (Exception ex)
             {
@@ -48,17 +47,17 @@ namespace API.Controllers
 
         }
 
-        // GET: api/Quiz/5
+        // GET: api/Vraag/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
             try
             {
-                var quiz = await quizRepo.GetAsync(id);
+                var vraag = await vraagRepo.GetAsync(id);
 
-                var quizDTO = mapper.Map<QuizDTO>(quiz);
+                var vraagDTO = mapper.Map<VraagDTO>(vraag);
 
-                return Ok(quizDTO);
+                return Ok(vraagDTO);
             }
             catch (Exception ex)
             {
@@ -68,21 +67,20 @@ namespace API.Controllers
             }
         }
 
-        // POST: api/Quiz
+        // POST: api/Vraag
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] SaveQuizDTO saveQuizDTO)
+        public async Task<IActionResult> Post([FromBody] SaveVraagDTO saveVraagDTO)
         {
             try
             {
 
-                var quiz = mapper.Map<Quiz>(saveQuizDTO);
-                //hebben we hierbij een mapper nodig?
-                quizRepo.Add(quiz);
-                await quizRepo.SaveChangesAsync();
+                var vraag = mapper.Map<Vraag>(saveVraagDTO);
+                vraagRepo.Add(vraag);
+                await vraagRepo.SaveChangesAsync();
 
-                var quizDTO = mapper.Map<QuizDTO>(quiz);
+                var vraagDTO = mapper.Map<VraagDTO>(vraag);
 
-                return CreatedAtAction(nameof(GetById), new { id = quiz.Id }, quizDTO);
+                return CreatedAtAction(nameof(GetById), new { id = vraag.Id }, vraagDTO);
             }
             catch (Exception ex)
             {
@@ -92,21 +90,21 @@ namespace API.Controllers
             }
         }
 
-        // PUT: api/Quiz/5
+        // PUT: api/Vraag/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id,[FromBody] SaveQuizDTO quizDTO)
+        public async Task<IActionResult> Put(Guid id, [FromBody] SaveVraagDTO saveVraagDTO)
         {
             try
             {
-                if (id != quizDTO.Id)
+                if (id != saveVraagDTO.Id)
                     return BadRequest("Id's kloppen niet");
-                var quiz = await quizRepo.GetAsync(quizDTO.Id);
+                var vraag = await vraagRepo.GetAsync(saveVraagDTO.Id);
 
-                if (quiz == null)
+                if (vraag == null)
                     return NotFound();
 
-                mapper.Map(quizDTO, quiz);
-                await quizRepo.SaveChangesAsync();
+                mapper.Map(saveVraagDTO, vraag);
+                await vraagRepo.SaveChangesAsync();
 
                 return NoContent();
             }
@@ -124,14 +122,14 @@ namespace API.Controllers
         {
             try
             {
-                var quiz = await quizRepo.GetAsync(id);
+                var vraag = await vraagRepo.GetAsync(id);
 
-                if (quiz == null)
+                if (vraag == null)
                     return NotFound();
 
-                quizRepo.Delete(quiz);
+                vraagRepo.Delete(vraag);
 
-                await quizRepo.SaveChangesAsync();
+                await vraagRepo.SaveChangesAsync();
 
                 return NoContent();
             }

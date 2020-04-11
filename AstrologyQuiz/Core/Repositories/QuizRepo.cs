@@ -9,50 +9,29 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    public class QuizRepo : IQuizRepo
+    public class QuizRepo : GenericRepo<Quiz>, IQuizRepo
     {
         private readonly AstrologyQuizDbContext context;
 
-        public QuizRepo(AstrologyQuizDbContext context)
+        public QuizRepo(AstrologyQuizDbContext context):base(context)
         {
             this.context = context;
         }
 
-        public async Task<IEnumerable<Quiz>> GetQuizzenAsync()
+        public override async Task<IEnumerable<Quiz>> GetAllAsync()
         {
             return await context.Quizzen
-                .Include(q => q.Vragen)
-                .ThenInclude(v => v.Antwoorden)
-                .ToListAsync();
+                .Include(q => q.Moeilijkheidsgraad)
+               .Include(q => q.Vragen)
+               .ThenInclude(v => v.Antwoorden)
+               .ToListAsync();
         }
-        public async Task<Quiz> GetQuizAsync(Guid id)
+               
+
+        public void AddQuizToGebruiker(QuizGebruiker quizGebruiker)
         {
-            return await context.Quizzen.SingleOrDefaultAsync(q => q.Id == id);
-        }
-        public async Task<Quiz> AddQuizAsync(Quiz quiz)
-        {
-                await context.Quizzen.AddAsync(quiz);
-                await context.SaveChangesAsync();
-                return quiz;
+            context.QuizGebruikers.Add(quizGebruiker);
         }
 
-        public async Task AddQuizToGebruikerAsync(QuizGebruiker quizGebruiker)
-        {
-            await context.QuizGebruikers.AddAsync(quizGebruiker);
-            await context.SaveChangesAsync();
-
-        }
-
-        public async Task UpdateQuizGebruikerAsync(QuizGebruiker quizGebruiker)
-        {
-            context.QuizGebruikers.Update(quizGebruiker);
-            await context.SaveChangesAsync();
-        }
-        public async Task DeleteQuizAsync(Quiz quiz)
-        {
-            context.Quizzen.Remove(quiz);
-            await context.SaveChangesAsync();
-            
-        }
     }
 }

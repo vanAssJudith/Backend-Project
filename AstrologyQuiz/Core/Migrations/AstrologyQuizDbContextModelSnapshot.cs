@@ -117,15 +117,15 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1425231e-6b99-4b9a-9ff4-664b3be22493",
+                            Id = "47a23ead-7712-41f1-867d-7f176e7f8dcd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7e6bc43e-ee46-42fa-aad2-b639eb0e2659",
+                            ConcurrencyStamp = "e694486d-c79d-40f5-982e-05dcbae41b62",
                             Email = "Judith.van.ass@student.howest.be",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Naam = "Judith van Ass",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7280c850-d26b-4519-9919-740fcdf8eb0c",
+                            SecurityStamp = "71efdd7e-1e5f-46c7-a219-8f051a1ed029",
                             TwoFactorEnabled = false,
                             UserName = "Judithvanass"
                         });
@@ -239,10 +239,7 @@ namespace Core.Migrations
                     b.Property<string>("Beschrijving")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuizId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("QuizId1")
+                    b.Property<Guid>("QuizId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Score")
@@ -253,7 +250,7 @@ namespace Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuizId1");
+                    b.HasIndex("QuizId");
 
                     b.ToTable("Vragen");
                 });
@@ -406,7 +403,7 @@ namespace Core.Migrations
             modelBuilder.Entity("Core.Models.Quiz", b =>
                 {
                     b.HasOne("Core.Models.Moeilijkheidsgraad", "Moeilijkheidsgraad")
-                        .WithMany()
+                        .WithMany("Quizzen")
                         .HasForeignKey("MoeilijkheidsgraadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -415,11 +412,11 @@ namespace Core.Migrations
             modelBuilder.Entity("Core.Models.QuizGebruiker", b =>
                 {
                     b.HasOne("Core.Models.Gebruiker", "Gebruiker")
-                        .WithMany()
+                        .WithMany("QuizGebruikers")
                         .HasForeignKey("GebruikerId");
 
                     b.HasOne("Core.Models.Quiz", "Quiz")
-                        .WithMany()
+                        .WithMany("QuizGebruikers")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -436,7 +433,7 @@ namespace Core.Migrations
                     b.HasOne("Core.Models.QuizGebruiker", "QuizGebruiker")
                         .WithMany("QuizGebruikerAntwoorden")
                         .HasForeignKey("QuizGebruikerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -444,7 +441,9 @@ namespace Core.Migrations
                 {
                     b.HasOne("Core.Models.Quiz", "Quiz")
                         .WithMany("Vragen")
-                        .HasForeignKey("QuizId1");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
