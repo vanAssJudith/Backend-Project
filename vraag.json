@@ -1,0 +1,40 @@
+{
+    "quizId": "731c3e7e-4183-42ab-3344-08d7de47378d",
+      
+       "Titel" : "wat is de hoofdstad van Frankrijk",
+       "Beschrijving" : "vraag 1",
+       "AfbeeldingURL" : "vraag 1",
+       "Score" : 50,
+  
+       "Antwoorden":[
+           {
+          "Omschrijving" : "Amsterdam",
+          "AfbeeldingURL" : "antwoord1",
+          "IsCorrect" : false, 
+          "Uitleg" : "antwoord1"
+  
+       },
+       {
+          "Omschrijving" : "Lyon",
+          "AfbeeldingURL" : "antwoord2",
+          "IsCorrect" : false,
+          "Uitleg" : "antwoord2"
+  
+       },{
+          "Omschrijving" : "palma de mallorca",
+          "AfbeeldingURL" : "antwoord3",
+          "IsCorrect" : false,
+          "Uitleg" : "antwoord3"
+  
+       },{
+          "Omschrijving" : "Parijs",
+          "AfbeeldingURL" : "antwoord4",
+          "IsCorrect" : true,
+          "Uitleg" : "antwoord4"
+  
+       }
+      
+      
+      ]
+      
+  }

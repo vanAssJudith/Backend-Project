@@ -1,0 +1,85 @@
+{
+    "Onderwerp": "test",
+    "MoeilijkheidsgraadId": 1,
+    "Beschrijving": "test",
+
+    "Vragen" :[
+       {
+     "Titel" : "vraag 1",
+     "Beschrijving" : "vraag 1",
+     "AfbeeldingURL" : "vraag 1",
+     "Score" : 50,
+
+     "Antwoorden":[
+         {
+        "Omschrijving" : "antwoord1",
+        "AfbeeldingURL" : "antwoord1",
+        "IsCorrect" : false,
+        "Uitleg" : "antwoord1"
+
+     },
+     {
+        "Omschrijving" : "antwoord2",
+        "AfbeeldingURL" : "antwoord2",
+        "IsCorrect" : false,
+        "Uitleg" : "antwoord2"
+
+     },{
+        "Omschrijving" : "antwoord3",
+        "AfbeeldingURL" : "antwoord3",
+        "IsCorrect" : false,
+        "Uitleg" : "antwoord3"
+
+     },{
+        "Omschrijving" : "antwoord4",
+        "AfbeeldingURL" : "antwoord4",
+        "IsCorrect" : true,
+        "Uitleg" : "antwoord4"
+
+     }
+    
+    
+    ]
+    },
+
+
+    {
+        "Titel" : "vraag 2",
+        "Beschrijving" : "vraag 2",
+        "AfbeeldingURL" : "vraag 2",
+        "Score" : 50,
+        "Antwoorden":[
+            {
+           "Omschrijving" : "antwoord1",
+           "AfbeeldingURL" : "antwoord1",
+           "IsCorrect" : false,
+           "Uitleg" : "antwoord1"
+   
+        },
+        {
+           "Omschrijving" : "antwoord2",
+           "AfbeeldingURL" : "antwoord2",
+           "IsCorrect" : false,
+           "Uitleg" : "antwoord2"
+   
+        },{
+           "Omschrijving" : "antwoord3",
+           "AfbeeldingURL" : "antwoord3",
+           "IsCorrect" : false,
+           "Uitleg" : "antwoord3"
+   
+        },{
+           "Omschrijving" : "antwoord4",
+           "AfbeeldingURL" : "antwoord4",
+           "IsCorrect" : true,
+           "Uitleg" : "antwoord4"
+   
+        }
+       
+       
+       ]
+
+       }
+
+    ]
+}

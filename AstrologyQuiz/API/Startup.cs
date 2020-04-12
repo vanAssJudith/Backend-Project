@@ -43,7 +43,8 @@ namespace API
             });
             // TODO: Automapper implementer (2 dependencies)
             services.AddAutoMapper(typeof(Startup));
-        
+            services.AddCors();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +59,13 @@ namespace API
 
             app.UseRouting();
 
+            app.UseCors(builder => {
+                builder.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+            });
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -70,6 +78,8 @@ namespace API
                 c.RoutePrefix = "swagger"; //path naar de UI pagina: /swagger/index.html 
                 c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "AstrologyQuizDB v1.0");
             });
+
+            
 
         }
     }
