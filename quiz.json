@@ -1,85 +1,122 @@
 {
-    "Onderwerp": "test",
-    "MoeilijkheidsgraadId": 1,
-    "Beschrijving": "test",
+   "Onderwerp": "De ruimte",
+   "MoeilijkheidsgraadId": 1,
+   "Beschrijving": "Dit is een quiz over de ruimte.",
 
-    "Vragen" :[
-       {
-     "Titel" : "vraag 1",
-     "Beschrijving" : "vraag 1",
-     "AfbeeldingURL" : "vraag 1",
-     "Score" : 50,
+   "Vragen" :[
+      {
+    "Titel" : "De blauwe planeet",
+    "Beschrijving" : "Waarom wordt onze aarde 'de blauwe planeet' genoemd?",
+    "AfbeeldingURL" : "aarde.png",
+    "Score" : 50,
 
-     "Antwoorden":[
-         {
-        "Omschrijving" : "antwoord1",
-        "AfbeeldingURL" : "antwoord1",
-        "IsCorrect" : false,
-        "Uitleg" : "antwoord1"
-
-     },
-     {
-        "Omschrijving" : "antwoord2",
-        "AfbeeldingURL" : "antwoord2",
-        "IsCorrect" : false,
-        "Uitleg" : "antwoord2"
-
-     },{
-        "Omschrijving" : "antwoord3",
-        "AfbeeldingURL" : "antwoord3",
-        "IsCorrect" : false,
-        "Uitleg" : "antwoord3"
-
-     },{
-        "Omschrijving" : "antwoord4",
-        "AfbeeldingURL" : "antwoord4",
-        "IsCorrect" : true,
-        "Uitleg" : "antwoord4"
-
-     }
-    
-    
-    ]
-    },
-
-
-    {
-        "Titel" : "vraag 2",
-        "Beschrijving" : "vraag 2",
-        "AfbeeldingURL" : "vraag 2",
-        "Score" : 50,
-        "Antwoorden":[
-            {
-           "Omschrijving" : "antwoord1",
-           "AfbeeldingURL" : "antwoord1",
-           "IsCorrect" : false,
-           "Uitleg" : "antwoord1"
-   
-        },
+    "Antwoorden":[
         {
-           "Omschrijving" : "antwoord2",
-           "AfbeeldingURL" : "antwoord2",
-           "IsCorrect" : false,
-           "Uitleg" : "antwoord2"
-   
-        },{
-           "Omschrijving" : "antwoord3",
-           "AfbeeldingURL" : "antwoord3",
-           "IsCorrect" : false,
-           "Uitleg" : "antwoord3"
-   
-        },{
-           "Omschrijving" : "antwoord4",
-           "AfbeeldingURL" : "antwoord4",
-           "IsCorrect" : true,
-           "Uitleg" : "antwoord4"
-   
-        }
-       
-       
-       ]
+       "Omschrijving" : "Ze bestaat voor een groot deel uit water",
+       "AfbeeldingURL" : "geen",
+       "IsCorrect" : true,
+       "Uitleg" : "Dit is zo"
 
+    },
+    {
+       "Omschrijving" : "Er zijn veel wolken aanwezig",
+       "AfbeeldingURL" : "geen",
+       "IsCorrect" : false,
+       "Uitleg" : "Dit is fout"
+
+    },{
+       "Omschrijving" : "Het is er ijskout",
+       "AfbeeldingURL" : "geen",
+       "IsCorrect" : false,
+       "Uitleg" : "Dit is fout"
+
+    },{
+       "Omschrijving" : "Door de atmosfeer",
+       "AfbeeldingURL" : "geen",
+       "IsCorrect" : false,
+       "Uitleg" : "Dit is fout"
+
+    }
+   
+   
+   ]
+   },
+
+
+   {
+       "Titel" : "De zon",
+       "Beschrijving" : "De zon is ...",
+       "AfbeeldingURL" : "zon.png",
+       "Score" : 50,
+       "Antwoorden":[
+           {
+          "Omschrijving" : "Een planeet",
+          "AfbeeldingURL" : "geen",
+          "IsCorrect" : false,
+          "Uitleg" : "Dit is fout"
+  
+       },
+       {
+          "Omschrijving" : "Een ster",
+          "AfbeeldingURL" : "geen",
+          "IsCorrect" : true,
+          "Uitleg" : "Dit is zo"
+  
+       },{
+          "Omschrijving" : "Een planeet die licht geeft",
+          "AfbeeldingURL" : "geen",
+          "IsCorrect" : false,
+          "Uitleg" : "Dit is fout"
+  
+       },{
+          "Omschrijving" : "Een dwergplaneet",
+          "AfbeeldingURL" : "geen",
+          "IsCorrect" : false,
+          "Uitleg" : "Dit is fout"
+  
        }
+      
+      
+      ]
+      },
 
-    ]
+   {
+      "Titel" : "Eerste leven",
+      "Beschrijving" : "Wat was het eerste levende wezen in de ruimte?",
+      "AfbeeldingURL" : "dier.png",
+      "Score" : 50,
+
+      "Antwoorden":[
+        {
+       "Omschrijving" : "Een hond",
+       "AfbeeldingURL" : "geen",
+       "IsCorrect" : false,
+       "Uitleg" : "Dit is fout"
+
+      },
+      {
+         "Omschrijving" : "Een muis",
+         "AfbeeldingURL" : "geen",
+         "IsCorrect" : false,
+         "Uitleg" : "Dit is fout"
+
+      },{
+         "Omschrijving" : "Een vis",
+         "AfbeeldingURL" : "geen",
+         "IsCorrect" : false,
+         "Uitleg" : "Dit is fout"
+
+      },{
+         "Omschrijving" : "Een fruitvliegje",
+         "AfbeeldingURL" : "geen",
+         "IsCorrect" : true,
+         "Uitleg" : "Dit is zo"
+
+      }
+   
+   
+   ]
+   }
+
+   ]
 }

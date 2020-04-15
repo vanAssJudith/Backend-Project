@@ -21,12 +21,18 @@ namespace Core.Repositories
         public override async Task<IEnumerable<Quiz>> GetAllAsync()
         {
             return await context.Quizzen
+                .Include(q => q.Moeilijkheidsgraad)               
+               .ToListAsync();
+        }
+
+        public override async Task<Quiz> GetAsync(Guid id)
+        {
+            return await context.Quizzen
                 .Include(q => q.Moeilijkheidsgraad)
                .Include(q => q.Vragen)
                .ThenInclude(v => v.Antwoorden)
-               .ToListAsync();
+               .SingleOrDefaultAsync(q => q.Id == id);
         }
-               
 
         public void AddQuizToGebruiker(QuizGebruiker quizGebruiker)
         {

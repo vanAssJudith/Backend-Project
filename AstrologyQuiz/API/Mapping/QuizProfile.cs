@@ -26,11 +26,16 @@ namespace API.Mapping
             CreateMap<SaveAntwoordDTO, Antwoord>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
 
+            CreateMap<AntwoordDTO, Antwoord>()
+               .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<SaveQuizDTO, Quiz>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());            
             
             CreateMap<SaveVraagDTO, Vraag>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore()); 
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+
+            CreateMap<VraagDTO, Vraag>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<MoeilijkheidsgraadDTO, Moeilijkheidsgraad>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<QuizGebruikerDTO, QuizGebruiker>()

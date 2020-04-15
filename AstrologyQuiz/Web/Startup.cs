@@ -30,8 +30,12 @@ namespace Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // IoCContaier
+            // IoCContaiee
+            // TODO: IoC container vullen met nieuwe repo's ook in web
             services.AddScoped<IQuizRepo, QuizRepo>();
+            services.AddScoped<IAntwoordRepo, AntwoordRepo>();
+            services.AddScoped<IVraagRepo, VraagRepo>();
+
 
             services.AddDbContext<AstrologyQuizDbContext>(options =>
                 options.UseSqlServer(
