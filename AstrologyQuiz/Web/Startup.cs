@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Core.Models;
 using Core.Repositories;
+using Core.Services;
 
 namespace Web
 {
@@ -35,6 +36,8 @@ namespace Web
             services.AddScoped<IQuizRepo, QuizRepo>();
             services.AddScoped<IAntwoordRepo, AntwoordRepo>();
             services.AddScoped<IVraagRepo, VraagRepo>();
+            services.AddScoped<IQuizGebruikerRepo, QuizGebruikerRepo>();
+            services.AddScoped<IQuizService, QuizService>();
 
 
             services.AddDbContext<AstrologyQuizDbContext>(options =>

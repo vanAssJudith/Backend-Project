@@ -34,9 +34,13 @@
                 @Html.DisplayFor(modelItem => item.Moeilijkheidsgraad.Titel)
             </td>
             <td>
-                <a asp-action="Play" asp-route-id="@item.Id">Play</a>
+                <a asp-action="Speel" asp-route-id="@item.Id">Speel</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<div>
+    <a asp-action="NieuweQuiz">+ Nieuwe quiz</a>
+</div>
+

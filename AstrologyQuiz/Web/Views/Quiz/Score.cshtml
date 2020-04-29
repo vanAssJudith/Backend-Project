@@ -1,0 +1,81 @@
+﻿@model Web.ViewModels.ResultaatVM
+
+@{
+    ViewData["Title"] = "Score";
+}
+Hey Bitch jouw score is @Model.Score op @Model.Vragen.Sum(v => v.Score);
+@foreach (var vraag in Model.Vragen)
+{
+    <div class="c-quiz__vraag--titel">@vraag.Titel</div>
+    <div>@vraag.Beschrijving</div>
+    <div class="c-quiz__antwoorden">
+        @foreach (var antwoord in vraag.Antwoorden)
+        {
+            <div class="c-antwoord">@antwoord.Omschrijving</div >
+            @if (@Model.QuizGebruikerAntwoorden.Any(c => c.AntwoordId == antwoord.Id))
+            {
+            <div class="c-antwoord c-antwoord--selected"> Uw antwoord </div>
+            }
+            @if (antwoord.IsCorrect)
+            {
+            <div class="c-antwoord c-antwoord--correct">@antwoord.IsCorrect</div>
+            }
+            <div>@antwoord.Uitleg</div>
+             
+        }
+    </div>
+}
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>
+<style>
+    .c-quiz {
+    }
+
+    .c-quiz__vragen {
+    }
+
+    .c-quiz__vraag {
+        margin: 24px;
+    }
+
+    .c-quiz__vraag--titel {
+        font-size: 24px;
+        margin-top: 24px;
+    }
+
+    .c-quiz__vraag--img {
+        height: 100px;
+        margin: 24px 0 24px 0;
+    }
+
+    .c-quiz__antwoorden {
+        display: table;
+        grid-template-columns: 2fr 1fr 1fr 2fr;
+        column-gap: 2rem;
+        font: bold;
+    }
+
+    .c-quiz__radiobtn {
+        display: none;
+    }
+
+        .c-quiz__radiobtn:checked + .c-quiz__antwoord {
+            border-color: white;
+        }
+
+    .c-quiz__antwoord {
+        border: 1px solid transparent;
+    }
+
+    .c-antwoord--selected {
+        color: yellow;
+    }
+
+    .c-antwoord--correct {
+        color: green;
+    }
+
+    .c-score {
+    }
+</style>

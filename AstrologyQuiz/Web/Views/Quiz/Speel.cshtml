@@ -1,10 +1,10 @@
 ﻿@model Core.Models.Quiz
 
 @{
-    ViewData["Title"] = "Play";
+    ViewData["Title"] = "Speel";
 }
 
-<h1>Play</h1>
+<h1>Speel</h1>
 
 <div class="c-quiz">
     <h4>Quiz</h4>
@@ -31,9 +31,10 @@
     </dl>
 
     <h2>Vragen</h2>
-    <div class="c-quiz__vragen">
-        @foreach (var vraag in Model.Vragen)
+    <form class="c-quiz__vragen" method="post" asp-action="speel">
+        @for (int i = 0; i < Model.Vragen.Count; i++)
         {
+            var vraag = Model.Vragen.ToList()[i];
             <div class="c-quiz__vraag">
                 <div class="c-quiz__vraag--titel">@vraag.Titel: </div>
                 <div>@vraag.Beschrijving</div>
@@ -41,7 +42,7 @@
                 <div class="c-quiz__antwoorden">
                     @foreach (var antwoord in vraag.Antwoorden)
                     {
-                        <input class="c-quiz__radiobtn" type="radio" name="vraag-@vraag.Id" value="@antwoord.Id" id="@antwoord.Id"/>
+                        <input class="c-quiz__radiobtn" type="radio" value="@antwoord.Id" name="antwoorden[@i]" id="@antwoord.Id"/>
                         <label class="c-quiz__antwoord" for="@antwoord.Id">
                             <span>@antwoord.Omschrijving</span>
                             @if (antwoord.AfbeeldingURL != null)
@@ -54,7 +55,8 @@
                 </div>
             </div>
         }
-    </div>
+        <button>Antwoorden indienen</button>
+    </form>
 
 </div>
 <div>

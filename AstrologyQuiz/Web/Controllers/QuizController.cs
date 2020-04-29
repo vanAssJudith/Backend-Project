@@ -2,32 +2,100 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Models;
 using Core.Repositories;
+using Core.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class QuizController : Controller
     {
         private readonly IQuizRepo quizRepo;
+        private readonly UserManager<Gebruiker> _userManager;
+        private readonly IQuizGebruikerRepo quizGebruikerRepo;
+        private readonly IQuizService quizService;
 
-        public QuizController(IQuizRepo quizRepo)
+        public QuizController(IQuizRepo quizRepo, UserManager<Gebruiker> userManager, IQuizGebruikerRepo quizGebruikerRepo, IQuizService quizService)
         {
+            _userManager = userManager;
+            this.quizGebruikerRepo = quizGebruikerRepo;
+            this.quizService = quizService;
             this.quizRepo = quizRepo;
         }
         // TODO Task niet vergeten
+        
         public async Task<IActionResult> Index()
         {
-            var quizzes =await this.quizRepo.GetAllAsync();
+            var quizzes = await this.quizRepo.GetAllAsync();
 
             return View(quizzes);
         }
 
-        public async Task<IActionResult> Play(Guid id)
+        public async Task<IActionResult> Speel(Guid id)
         {
-            var quiz = await this.quizRepo.GetAsync(id);
+            try
+            {
+                var quiz = await this.quizRepo.GetAsync(id);
 
-            return View(quiz);
+                return View(quiz);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Speel(List<Guid> antwoorden, Guid id)
+        {
+            try
+            {
+                var gebruiker = await _userManager.GetUserAsync(User);
+
+                // 1 lijst met aanwoorden overlopen en en nieuw object QuizGebruikerAntwoord
+               var quizGebruiker =  await quizService.SaveQuizGebruikerAsync(antwoorden,id,gebruiker.Id);
+                
+                return RedirectToAction(nameof(Score), new { id = quizGebruiker.Id });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+    
+    
+        public async Task<IActionResult> Score(Guid id)
+        {
+            var quizGebruiker = await quizGebruikerRepo.GetAsync(id);
+
+            var resultaatVM = new ResultaatVM()
+            {
+                QuizGebruikerAntwoorden = quizGebruiker.QuizGebruikerAntwoorden,
+                Vragen = quizGebruiker.Quiz.Vragen,
+                Score = quizGebruiker.TotaalScore
+
+            };
+
+            return View(resultaatVM);
+        }
+
+        public async Task<IActionResult> NieuweQuiz()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> NieuweQuiz(Quiz quiz)
+        {
+            return View();
         }
     }
 }
