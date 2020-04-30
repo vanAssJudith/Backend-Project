@@ -3,6 +3,7 @@ using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,5 +38,19 @@ namespace Core.Repositories
                 .ThenInclude(qga => qga.Antwoorden)
                 .SingleOrDefaultAsync(q => q.Id == id);
         }
+
+        public async Task<IEnumerable<QuizGebruiker>> GetTopScore(int getal, Guid quizId)
+        {
+            return await context.QuizGebruikers
+                .Include(q => q.Quiz)
+                .Include(a => a.QuizGebruikerAntwoorden)
+                .Include(g => g.Gebruiker)
+                .Where(q => q.QuizId == quizId)
+                .OrderByDescending(t => t.TotaalScore)
+                .Take(getal)
+                .ToListAsync();
+        }
+
+       
     }
 }

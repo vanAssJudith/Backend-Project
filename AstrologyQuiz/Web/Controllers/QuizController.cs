@@ -31,9 +31,9 @@ namespace Web.Controllers
         
         public async Task<IActionResult> Index()
         {
-            var quizzes = await this.quizRepo.GetAllAsync();
+            var quizzen = await this.quizRepo.GetAllAsync();
 
-            return View(quizzes);
+            return View(quizzen);
         }
 
         public async Task<IActionResult> Speel(Guid id)
@@ -81,21 +81,24 @@ namespace Web.Controllers
             {
                 QuizGebruikerAntwoorden = quizGebruiker.QuizGebruikerAntwoorden,
                 Vragen = quizGebruiker.Quiz.Vragen,
-                Score = quizGebruiker.TotaalScore
+                Score = quizGebruiker.TotaalScore,
+                QuizId = quizGebruiker.QuizId
 
             };
 
             return View(resultaatVM);
         }
 
+
         public async Task<IActionResult> NieuweQuiz()
         {
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> NieuweQuiz(Quiz quiz)
+
+        public async Task<IActionResult> TopScores()
         {
-            return View();
+            var quizzen = await quizRepo.GetAllAsync();
+            return View(quizzen);
         }
     }
 }

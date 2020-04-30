@@ -10,6 +10,7 @@ namespace Web.ViewModels
     {
         public ICollection<Vraag> Vragen { get; set; }
         public ICollection<QuizGebruikerAntwoord> QuizGebruikerAntwoorden { get; set; }
+        public Guid QuizId { get; set; }
         public int? Score { get; set; }
     }
 }

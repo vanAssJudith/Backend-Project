@@ -1,0 +1,46 @@
+﻿@model  IEnumerable<Core.Models.QuizGebruiker>
+@{
+    ViewData["Title"]="Default" ;
+}
+
+<h1>Topscores</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Gebruiker.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quiz.Onderwerp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotaalScore)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gebruiker.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quiz.Onderwerp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotaalScore) / @item.QuizGebruikerAntwoorden.Count
+            </td>
+
+        </tr>
+        }
+
+    </tbody>
+</table>

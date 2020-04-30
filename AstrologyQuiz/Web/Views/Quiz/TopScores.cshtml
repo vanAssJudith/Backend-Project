@@ -1,0 +1,10 @@
+﻿@model ICollection<Quiz>
+
+@{
+    ViewData["Title"] = "TopScores";
+}
+
+@foreach (var quiz in Model)
+{
+    @await Component.InvokeAsync("TopScores", new { aantal = 10, quizId = quiz.Id })
+}

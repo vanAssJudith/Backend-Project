@@ -5,31 +5,43 @@
 }
 
 <h1>NieuweQuiz</h1>
-
-<h4>Quiz</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="NieuweQuiz">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="c-form">
+    <form asp-action="NieuweQuiz" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Onderwerp" class="control-label">Onderwerp Quiz</label>
+            <input asp-for="Onderwerp" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="MoeilijkheidsgraadId" class="control-label">Moeilijkheidsgraad</label>
+            <select asp-for="MoeilijkheidsgraadId" class="form-control" asp-items="ViewBag.Titel"></select>
+        </div>
+
+
+        @for (int i = 0; i < 10; i++)
+        {
             <div class="form-group">
-                <label asp-for="Onderwerp" class="control-label"></label>
-                <input asp-for="Onderwerp" class="form-control" />
-                <span asp-validation-for="Onderwerp" class="text-danger"></span>
+                <label asp-for="@Model.Vragen.ToList()[0].Titel" class="control-label">Nieuwe vraag</label>
+                <input name="Vragen[@i].Titel" class="form-control" placeholder="Vraag"/>
             </div>
-            <div class="form-group">
-                <label asp-for="MoeilijkheidsgraadId" class="control-label"></label>
-                <select asp-for="MoeilijkheidsgraadId" class ="form-control" asp-items="ViewBag.MoeilijkheidsgraadId"></select>
+
+            <div>
+                @for (int y = 0; y < 4; y++)
+                {
+                <div class="form-group">
+                    <label for="vragen-@i-antwoord-@y" class="control-label"></label>
+                    <input name="Vragen[@i].Antwoorden[@y].Omschrijving" id="vragen-@i-antwoord-@y" class="form-control" placeholder="Antwoord" />
+                </div>
+                }
             </div>
-            <div class="form-group">
-                <label asp-for="Beschrijving" class="control-label"></label>
-                <input asp-for="Beschrijving" class="form-control" />
-                <span asp-validation-for="Beschrijving" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        }
+
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
     </div>
 </div>
 
