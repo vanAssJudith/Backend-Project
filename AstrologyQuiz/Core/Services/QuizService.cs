@@ -51,5 +51,6 @@ namespace Core.Services
             return quizGebruiker;
 
         }
+
     }
 }

@@ -102,6 +102,23 @@ namespace Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> NieuweQuiz(Quiz quiz)
+        {
+            try
+            {
+                quizRepo.Add(quiz);
+                await quizRepo.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
         public async Task<IActionResult> TopScores()
         {
             var quizzen = await quizRepo.GetAllAsync();

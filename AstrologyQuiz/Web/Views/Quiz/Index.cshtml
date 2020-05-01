@@ -23,33 +23,38 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Onderwerp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Beschrijving)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Moeilijkheidsgraad.Titel)
-            </td>
-            <td>
-                <a asp-action="Speel" asp-route-id="@item.Id">Speel</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Onderwerp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Beschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Moeilijkheidsgraad.Titel)
+                </td>
+                <td>
+                    <a asp-action="Speel" asp-route-id="@item.Id">Speel</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-<div>
-    <a class="c-btn" asp-action="NieuweQuiz">Maak een nieuwe quiz</a>
-</div>
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a class="c-btn" asp-action="NieuweQuiz">Maak een nieuwe quiz</a>
+    </div>
+
+}
 
 <style>
-    .c-btn{
+    .c-btn {
         background-color: #DF691A;
         color: #2B3E50;
-        cursor:pointer;
+        cursor: pointer;
         text-align: center;
         vertical-align: middle;
         border: 1px solid transparent;
