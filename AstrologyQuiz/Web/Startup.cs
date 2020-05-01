@@ -38,6 +38,7 @@ namespace Web
             services.AddScoped<IVraagRepo, VraagRepo>();
             services.AddScoped<IQuizGebruikerRepo, QuizGebruikerRepo>();
             services.AddScoped<IQuizService, QuizService>();
+            services.AddScoped<IMoeilijkheidsgraadRepo, MoeilijkheidsgraadRepo>();
 
 
             services.AddDbContext<AstrologyQuizDbContext>(options =>

@@ -3,33 +3,34 @@
 @{
     ViewData["Title"] = "Score";
 }
-    <h2>Uw score is @Model.Score op @Model.Vragen.Sum(v => v.Score)</h2>
+<h2>Uw score is @Model.Score op @Model.Vragen.Sum(v => v.Score)</h2>
+
+
 @foreach (var vraag in Model.Vragen)
 {
-    <div class="c-quiz__vraag--titel">@vraag.Titel</div>
-    <div>@vraag.Beschrijving</div>
+    <div class="c-quiz__vraag--titel">@vraag.Beschrijving</div>
     <div class="c-quiz__antwoorden">
         @foreach (var antwoord in vraag.Antwoorden)
         {
             <div class="c-antwoord">@antwoord.Omschrijving</div>
             @if (@Model.QuizGebruikerAntwoorden.Any(c => c.AntwoordId == antwoord.Id))
             {
-                <div class="c-antwoord c-antwoord--selected"> Uw antwoord </div>
+                <div class="c-antwoord--selected"> Uw antwoord </div>
             }
             @if (antwoord.IsCorrect)
             {
-                <div class="c-antwoord c-antwoord--correct">@antwoord.IsCorrect</div>
+                <div class="c-antwoord--correct">Juiste antwoord</div>
             }
-            <div>@antwoord.Uitleg</div>
+            <div class="c-uitleg">@antwoord.Uitleg</div>
 
         }
     </div>
 }
 
-@await Component.InvokeAsync("TopScores", new { aantal = 3, quizId = Model.QuizId })
-<div>
-    <a asp-action="Index">Back to Home</a>
+<div class="c-topscore">
+    @await Component.InvokeAsync("TopScores", new { aantal = 3, quizId = Model.QuizId })
 </div>
+
 <style>
     .c-quiz {
     }
@@ -52,7 +53,7 @@
     }
 
     .c-quiz__antwoorden {
-        display: table;
+        display: grid;
         grid-template-columns: 2fr 1fr 1fr 2fr;
         column-gap: 2rem;
         font: bold;
@@ -70,14 +71,39 @@
         border: 1px solid transparent;
     }
 
+    .c-antwoord {
+        grid-column: 1;
+        padding: 0.75rem;
+    }
+
+    .c-uitleg {
+        grid-column: 4;
+        padding: 0.75rem;
+    }
+
     .c-antwoord--selected {
         color: yellow;
+        grid-column: 2;
+        padding: 0.75rem;
     }
+
 
     .c-antwoord--correct {
         color: green;
+        grid-column: 3;
+        padding: 0.75rem;
     }
 
     .c-score {
+    }
+
+    .pb-3,
+    .py-3 {
+      padding-bottom: 1rem !important;
+      padding-top: 1rem !important;
+    }
+
+    .c-topscore{
+        margin: 24px 0 24px 0;
     }
 </style>

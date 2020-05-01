@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.Migrations
 {
     [DbContext(typeof(AstrologyQuizDbContext))]
-    [Migration("20200410195546_Init")]
+    [Migration("20200501125737_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,22 +115,6 @@ namespace Core.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "47a23ead-7712-41f1-867d-7f176e7f8dcd",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "e694486d-c79d-40f5-982e-05dcbae41b62",
-                            Email = "Judith.van.ass@student.howest.be",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Naam = "Judith van Ass",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "71efdd7e-1e5f-46c7-a219-8f051a1ed029",
-                            TwoFactorEnabled = false,
-                            UserName = "Judithvanass"
-                        });
                 });
 
             modelBuilder.Entity("Core.Models.Moeilijkheidsgraad", b =>
@@ -335,10 +319,12 @@ namespace Core.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -380,10 +366,12 @@ namespace Core.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

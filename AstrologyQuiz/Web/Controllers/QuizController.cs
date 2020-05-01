@@ -8,6 +8,7 @@ using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -19,16 +20,18 @@ namespace Web.Controllers
         private readonly UserManager<Gebruiker> _userManager;
         private readonly IQuizGebruikerRepo quizGebruikerRepo;
         private readonly IQuizService quizService;
+        private readonly IMoeilijkheidsgraadRepo moeilijkheidsGraadRepo;
 
-        public QuizController(IQuizRepo quizRepo, UserManager<Gebruiker> userManager, IQuizGebruikerRepo quizGebruikerRepo, IQuizService quizService)
+        public QuizController(IQuizRepo quizRepo, UserManager<Gebruiker> userManager, IQuizGebruikerRepo quizGebruikerRepo, IQuizService quizService, IMoeilijkheidsgraadRepo moeilijkheidsGraadRepo)
         {
             _userManager = userManager;
             this.quizGebruikerRepo = quizGebruikerRepo;
             this.quizService = quizService;
+            this.moeilijkheidsGraadRepo = moeilijkheidsGraadRepo;
             this.quizRepo = quizRepo;
         }
         // TODO Task niet vergeten
-        
+
         public async Task<IActionResult> Index()
         {
             var quizzen = await this.quizRepo.GetAllAsync();
@@ -60,8 +63,8 @@ namespace Web.Controllers
                 var gebruiker = await _userManager.GetUserAsync(User);
 
                 // 1 lijst met aanwoorden overlopen en en nieuw object QuizGebruikerAntwoord
-               var quizGebruiker =  await quizService.SaveQuizGebruikerAsync(antwoorden,id,gebruiker.Id);
-                
+                var quizGebruiker = await quizService.SaveQuizGebruikerAsync(antwoorden, id, gebruiker.Id);
+
                 return RedirectToAction(nameof(Score), new { id = quizGebruiker.Id });
             }
             catch (Exception)
@@ -71,8 +74,8 @@ namespace Web.Controllers
             }
 
         }
-    
-    
+
+
         public async Task<IActionResult> Score(Guid id)
         {
             var quizGebruiker = await quizGebruikerRepo.GetAsync(id);
@@ -92,6 +95,10 @@ namespace Web.Controllers
 
         public async Task<IActionResult> NieuweQuiz()
         {
+            var test = await moeilijkheidsGraadRepo.GetAllAsync();
+            ViewBag.MoeilijkheidsgraadId = new SelectList(test,"Id","Titel");
+
+
             return View();
         }
 

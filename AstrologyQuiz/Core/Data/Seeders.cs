@@ -12,15 +12,15 @@ namespace Core.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Gebruiker>().HasData(
-                new Gebruiker
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    UserName = "Judithvanass",
-                    Naam = "Judith van Ass",
-                    Email = "Judith.van.ass@student.howest.be",
-                    //PasswordHash = "MijnP@sw00rd1",
-                });
+            //modelBuilder.Entity<Gebruiker>().HasData(
+            //    new Gebruiker
+            //    {
+            //        Id = Guid.NewGuid().ToString(),
+            //        UserName = "Judithvanass",
+            //        Naam = "Judith van Ass",
+            //        Email = "Judith.van.ass@student.howest.be",
+            //        //PasswordHash = "MijnP@sw00rd1",
+            //    });
 
             modelBuilder.Entity<Moeilijkheidsgraad>().HasData(
                 new Moeilijkheidsgraad() { Id = 1, Titel = "Gemakkelijk" },
@@ -63,7 +63,26 @@ namespace Core.Data
                     throw new InvalidOperationException("Failed to build user and roles");
                 }
             }
-            
+
+            if (await userMgr.FindByNameAsync("judithvanass") == null)
+            {
+                var user = new Gebruiker()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "judithvanass",
+                    Naam = "JudithvanAss",
+                    Email = "judith.van.ass@student.howest.be"
+                };
+
+                var userResult = await userMgr.CreateAsync(user, "MijnP@sw00rd1");
+                var roleResult = await userMgr.AddToRoleAsync(user, "Deelnemer");
+
+                if (!userResult.Succeeded || !roleResult.Succeeded)
+                {
+                    throw new InvalidOperationException("Failed to build user and roles");
+                }
+            }
+
             var nmbrDeelnemers = 9;
             for (var i = 1; i <= nmbrDeelnemers; i++)
             {

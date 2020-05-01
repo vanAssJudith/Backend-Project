@@ -13,9 +13,10 @@
             <label asp-for="Onderwerp" class="control-label">Onderwerp Quiz</label>
             <input asp-for="Onderwerp" class="form-control" />
         </div>
+        @ViewBag.Name
         <div class="form-group">
             <label asp-for="MoeilijkheidsgraadId" class="control-label">Moeilijkheidsgraad</label>
-            <select asp-for="MoeilijkheidsgraadId" class="form-control" asp-items="ViewBag.Titel"></select>
+            <select asp-for="MoeilijkheidsgraadId" class="form-control" asp-items="ViewBag.MoeilijkheidsgraadId"></select>
         </div>
 
 

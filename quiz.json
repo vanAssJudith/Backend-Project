@@ -8,31 +8,31 @@
     "Titel" : "De blauwe planeet",
     "Beschrijving" : "Waarom wordt onze aarde 'de blauwe planeet' genoemd?",
     "AfbeeldingURL" : "aarde.png",
-    "Score" : 50,
+    "Score" : 1,
 
     "Antwoorden":[
         {
        "Omschrijving" : "Ze bestaat voor een groot deel uit water",
-       "AfbeeldingURL" : "geen",
+       "AfbeeldingURL" : "null",
        "IsCorrect" : true,
        "Uitleg" : "Dit is zo"
 
     },
     {
        "Omschrijving" : "Er zijn veel wolken aanwezig",
-       "AfbeeldingURL" : "geen",
+       "AfbeeldingURL" : "null",
        "IsCorrect" : false,
        "Uitleg" : "Dit is fout"
 
     },{
-       "Omschrijving" : "Het is er ijskout",
-       "AfbeeldingURL" : "geen",
+       "Omschrijving" : "Het is er ijskoud",
+       "AfbeeldingURL" : "null",
        "IsCorrect" : false,
        "Uitleg" : "Dit is fout"
 
     },{
        "Omschrijving" : "Door de atmosfeer",
-       "AfbeeldingURL" : "geen",
+       "AfbeeldingURL" : "null",
        "IsCorrect" : false,
        "Uitleg" : "Dit is fout"
 
@@ -47,30 +47,30 @@
        "Titel" : "De zon",
        "Beschrijving" : "De zon is ...",
        "AfbeeldingURL" : "zon.png",
-       "Score" : 50,
+       "Score" : 1,
        "Antwoorden":[
            {
           "Omschrijving" : "Een planeet",
-          "AfbeeldingURL" : "geen",
+          "AfbeeldingURL" : "null",
           "IsCorrect" : false,
           "Uitleg" : "Dit is fout"
   
        },
        {
           "Omschrijving" : "Een ster",
-          "AfbeeldingURL" : "geen",
+          "AfbeeldingURL" : "null",
           "IsCorrect" : true,
           "Uitleg" : "Dit is zo"
   
        },{
           "Omschrijving" : "Een planeet die licht geeft",
-          "AfbeeldingURL" : "geen",
+          "AfbeeldingURL" : "null",
           "IsCorrect" : false,
           "Uitleg" : "Dit is fout"
   
        },{
           "Omschrijving" : "Een dwergplaneet",
-          "AfbeeldingURL" : "geen",
+          "AfbeeldingURL" : "null",
           "IsCorrect" : false,
           "Uitleg" : "Dit is fout"
   
@@ -84,31 +84,31 @@
       "Titel" : "Eerste leven",
       "Beschrijving" : "Wat was het eerste levende wezen in de ruimte?",
       "AfbeeldingURL" : "dier.png",
-      "Score" : 50,
+      "Score" : 1,
 
       "Antwoorden":[
         {
        "Omschrijving" : "Een hond",
-       "AfbeeldingURL" : "geen",
+       "AfbeeldingURL" : "null",
        "IsCorrect" : false,
        "Uitleg" : "Dit is fout"
 
       },
       {
          "Omschrijving" : "Een muis",
-         "AfbeeldingURL" : "geen",
+         "AfbeeldingURL" : "null",
          "IsCorrect" : false,
          "Uitleg" : "Dit is fout"
 
       },{
          "Omschrijving" : "Een vis",
-         "AfbeeldingURL" : "geen",
+         "AfbeeldingURL" : "null",
          "IsCorrect" : false,
          "Uitleg" : "Dit is fout"
 
       },{
          "Omschrijving" : "Een fruitvliegje",
-         "AfbeeldingURL" : "geen",
+         "AfbeeldingURL" : "null",
          "IsCorrect" : true,
          "Uitleg" : "Dit is zo"
 

@@ -106,8 +106,8 @@ namespace Core.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -158,8 +158,8 @@ namespace Core.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -289,19 +289,19 @@ namespace Core.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Naam", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "47a23ead-7712-41f1-867d-7f176e7f8dcd", 0, "e694486d-c79d-40f5-982e-05dcbae41b62", "Judith.van.ass@student.howest.be", false, false, null, "Judith van Ass", null, null, null, null, false, "71efdd7e-1e5f-46c7-a219-8f051a1ed029", false, "Judithvanass" });
+                table: "Moeilijkheidsgraden",
+                columns: new[] { "Id", "Titel" },
+                values: new object[] { 1, "Gemakkelijk" });
 
             migrationBuilder.InsertData(
                 table: "Moeilijkheidsgraden",
                 columns: new[] { "Id", "Titel" },
-                values: new object[,]
-                {
-                    { 1, "Gemakkelijk" },
-                    { 2, "Gemiddeld" },
-                    { 3, "Moeilijk" }
-                });
+                values: new object[] { 2, "Gemiddeld" });
+
+            migrationBuilder.InsertData(
+                table: "Moeilijkheidsgraden",
+                columns: new[] { "Id", "Titel" },
+                values: new object[] { 3, "Moeilijk" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Antwoorden_VraagId",
