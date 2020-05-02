@@ -47,7 +47,7 @@
                         <input class="c-quiz__radiobtn" type="radio" value="@antwoord.Id" name="antwoorden[@i]" id="@antwoord.Id"/>
                         <label class="c-quiz__antwoord" for="@antwoord.Id">
                             <span>@antwoord.Omschrijving</span>
-                            @if (antwoord.AfbeeldingURL != "null")
+                            @if (antwoord.AfbeeldingURL != null)
                             {
                                 <img class="c-quiz__antwoord-img" src="~/images/@antwoord.AfbeeldingURL" alt="afbeelding van @antwoord.Omschrijving" />
 

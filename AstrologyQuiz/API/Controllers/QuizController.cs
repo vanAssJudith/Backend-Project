@@ -7,12 +7,14 @@ using AutoMapper;
 using Core.Data;
 using Core.Models;
 using Core.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class QuizController : ControllerBase
@@ -29,6 +31,7 @@ namespace API.Controllers
         }
 
         // GET: api/Quiz
+        [Authorize(Roles = "Deelnemer, Admin")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -49,6 +52,7 @@ namespace API.Controllers
         }
 
         // GET: api/Quiz/5
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {

@@ -31,8 +31,12 @@
                 @for (int y = 0; y < 4; y++)
                 {
                 <div class="form-group">
-                    <label for="vragen-@i-antwoord-@y" class="control-label"></label>
+                    <label for="vragen-@i-antwoord-@y" class="control-label">Antwoord</label>
                     <input name="Vragen[@i].Antwoorden[@y].Omschrijving" id="vragen-@i-antwoord-@y" class="form-control" placeholder="Antwoord" />
+                    <label for="vragen-@i-antwoord-@y" class="control-label">Juist of fout</label>
+                    <input type="checkbox" name="Vragen[@i].Antwoorden[@y].IsCorrect" id="vragen-@i-antwoord-@y" class="form-control" />
+                    <label for="vragen-@i-antwoord-@y" class="control-label">Uitleg</label>
+                    <input name="Vragen[@i].Antwoorden[@y].Uitleg" id="vragen-@i-antwoord-@y" class="form-control" placeholder="uitleg" />
                 </div>
                 }
             </div>
@@ -45,6 +49,26 @@
     </form>
 </div>
 
+<script>
+ var counter = 1;
+ var test =`<div class="form-group">
+                <label class="control-label" for="z0__Titel">Nieuwe vraag</label>
+                <input name="Vragen[2].Titel" class="form-control" placeholder="Vraag"/>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="vragen-2-antwoord-0" class="control-label">Antwoord</label>
+                    <input name="Vragen[2].Antwoorden[0].Omschrijving" id="vragen-2-antwoord-0" class="form-control" placeholder="Antwoord" />
+                    <label for="vragen-2-antwoord-0" class="control-label">Juist of fout</label>
+                    <input type="checkbox" name="Vragen[2].Antwoorden[0].IsCorrect" id="vragen-2-antwoord-0" class="form-control" />
+                    <label for="vragen-2-antwoord-0" class="control-label">Uitleg</label>
+                    <input name="Vragen[2].Antwoorden[0].Uitleg" id="vragen-2-antwoord-0" class="form-control" placeholder="uitleg" />
+                </div>
+
+            </div>`
+
+
+</script>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

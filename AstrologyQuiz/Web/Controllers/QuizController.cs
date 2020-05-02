@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
+using Web.Models;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -21,22 +23,33 @@ namespace Web.Controllers
         private readonly IQuizGebruikerRepo quizGebruikerRepo;
         private readonly IQuizService quizService;
         private readonly IMoeilijkheidsgraadRepo moeilijkheidsGraadRepo;
+        private readonly ILogger<QuizController> logger;
 
-        public QuizController(IQuizRepo quizRepo, UserManager<Gebruiker> userManager, IQuizGebruikerRepo quizGebruikerRepo, IQuizService quizService, IMoeilijkheidsgraadRepo moeilijkheidsGraadRepo)
+        public QuizController(IQuizRepo quizRepo, UserManager<Gebruiker> userManager, IQuizGebruikerRepo quizGebruikerRepo, IQuizService quizService, IMoeilijkheidsgraadRepo moeilijkheidsGraadRepo, ILogger<QuizController> logger)
         {
             _userManager = userManager;
             this.quizGebruikerRepo = quizGebruikerRepo;
             this.quizService = quizService;
             this.moeilijkheidsGraadRepo = moeilijkheidsGraadRepo;
+            this.logger = logger;
             this.quizRepo = quizRepo;
         }
         // TODO Task niet vergeten
 
         public async Task<IActionResult> Index()
         {
-            var quizzen = await this.quizRepo.GetAllAsync();
+            try
+            {
+                var quizzen = await this.quizRepo.GetAllAsync();
 
-            return View(quizzen);
+                return View(quizzen);
+
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+                return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
+            }
         }
 
         public async Task<IActionResult> Speel(Guid id)
@@ -47,15 +60,16 @@ namespace Web.Controllers
 
                 return View(quiz);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                logger.LogError(ex.Message);
+                return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
             }
 
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Speel(List<Guid> antwoorden, Guid id)
         {
             try
@@ -67,10 +81,10 @@ namespace Web.Controllers
 
                 return RedirectToAction(nameof(Score), new { id = quizGebruiker.Id });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                logger.LogError(ex.Message);
+                return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
             }
 
         }
@@ -78,32 +92,50 @@ namespace Web.Controllers
 
         public async Task<IActionResult> Score(Guid id)
         {
-            var quizGebruiker = await quizGebruikerRepo.GetAsync(id);
-
-            var resultaatVM = new ResultaatVM()
+            try
             {
-                QuizGebruikerAntwoorden = quizGebruiker.QuizGebruikerAntwoorden,
-                Vragen = quizGebruiker.Quiz.Vragen,
-                Score = quizGebruiker.TotaalScore,
-                QuizId = quizGebruiker.QuizId
+                var quizGebruiker = await quizGebruikerRepo.GetAsync(id);
 
-            };
+                var resultaatVM = new ResultaatVM()
+                {
+                    QuizGebruikerAntwoorden = quizGebruiker.QuizGebruikerAntwoorden,
+                    Vragen = quizGebruiker.Quiz.Vragen,
+                    Score = quizGebruiker.TotaalScore,
+                    QuizId = quizGebruiker.QuizId
 
-            return View(resultaatVM);
+                };
+
+                return View(resultaatVM);
+
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+                return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
+            }
         }
 
 
         public async Task<IActionResult> NieuweQuiz()
         {
-            var test = await moeilijkheidsGraadRepo.GetAllAsync();
-            ViewBag.MoeilijkheidsgraadId = new SelectList(test,"Id","Titel");
+            try
+            {
+                var test = await moeilijkheidsGraadRepo.GetAllAsync();
+                ViewBag.MoeilijkheidsgraadId = new SelectList(test,"Id","Titel");
 
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+                return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> NieuweQuiz(Quiz quiz)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NieuweQuiz([Bind("Onderwerp, MoelijkheidgraadId")]Quiz quiz)
         {
             try
             {
@@ -112,17 +144,26 @@ namespace Web.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                logger.LogError(ex.Message);
+                return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
             }
 
         }
 
         public async Task<IActionResult> TopScores()
         {
-            var quizzen = await quizRepo.GetAllAsync();
-            return View(quizzen);
+            try
+            {
+                var quizzen = await quizRepo.GetAllAsync();
+                return View(quizzen);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+                return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
+            }
         }
     }
 }

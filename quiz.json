@@ -13,20 +13,20 @@
     "Antwoorden":[
         {
        "Omschrijving" : "Ze bestaat voor een groot deel uit water",
-       "AfbeeldingURL" : "null",
+       "AfbeeldingURL" : null,
        "IsCorrect" : true,
        "Uitleg" : "Dit is zo"
 
     },
     {
        "Omschrijving" : "Er zijn veel wolken aanwezig",
-       "AfbeeldingURL" : "null",
+       "AfbeeldingURL" : null,
        "IsCorrect" : false,
        "Uitleg" : "Dit is fout"
 
     },{
        "Omschrijving" : "Het is er ijskoud",
-       "AfbeeldingURL" : "null",
+       "AfbeeldingURL" : null,
        "IsCorrect" : false,
        "Uitleg" : "Dit is fout"
 
