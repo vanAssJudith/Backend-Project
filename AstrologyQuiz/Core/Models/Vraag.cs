@@ -19,15 +19,11 @@ namespace Core.Models
         public int Score { get; set; }
         [Required]
         public Guid QuizId { get; set; }
-
         public virtual ICollection<Antwoord> Antwoorden { get; set; }
-
         public Quiz Quiz { get; set; }
-
         public Vraag()
         {
             this.Antwoorden = new Collection<Antwoord>();
         }
     }
-
 }

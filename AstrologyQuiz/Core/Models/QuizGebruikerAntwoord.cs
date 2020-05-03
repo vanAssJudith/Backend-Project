@@ -8,7 +8,6 @@ namespace Core.Models
     {
         public Guid QuizGebruikerId { get; set; }
         public Guid AntwoordId { get; set; }
-
         public QuizGebruiker QuizGebruiker { get; set; }
         public Antwoord Antwoord { get; set; }
     }

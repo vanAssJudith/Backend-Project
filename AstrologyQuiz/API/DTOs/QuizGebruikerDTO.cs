@@ -13,7 +13,6 @@ namespace API.DTOs
         public string GebruikerId { get; set; }
         public DateTime StartDatum { get; set; }
         public int? TotaalScore { get; set; }
-
         public Quiz Quiz { get; set; }
         public Gebruiker Gebruiker { get; set; }
         public virtual ICollection<QuizGebruikerAntwoord> QuizGebruikerAntwoorden { get; set; }

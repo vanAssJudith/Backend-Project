@@ -38,9 +38,7 @@ namespace API.Controllers
             try
             {
                 var quizzen = await quizRepo.GetAllAsync();
-
                 var quizzenDTO = mapper.Map<IEnumerable<QuizDTO>>(quizzen);
-
                 return Ok(quizzenDTO);
             }
             catch (Exception ex)
@@ -59,15 +57,12 @@ namespace API.Controllers
             try
             {
                 var quiz = await quizRepo.GetAsync(id);
-
                 var quizDTO = mapper.Map<QuizDTO>(quiz);
-
                 return Ok(quizDTO);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-
                 return BadRequest();
             }
         }
@@ -78,21 +73,16 @@ namespace API.Controllers
         {
             try
             {
-
                 var quiz = mapper.Map<Quiz>(saveQuizDTO);
-                //hebben we hierbij een mapper nodig?
                 quizRepo.Add(quiz);
                 await quizRepo.SaveChangesAsync();
-
                 var quizDTO = mapper.Map<QuizDTO>(quiz);
-
                 return CreatedAtAction(nameof(GetById), new { id = quiz.Id }, quizDTO);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
                 return BadRequest("Toevoegen mislukt");
-
             }
         }
 
@@ -105,20 +95,16 @@ namespace API.Controllers
                 if (id != quizDTO.Id)
                     return BadRequest("Id's kloppen niet");
                 var quiz = await quizRepo.GetAsync(quizDTO.Id);
-
                 if (quiz == null)
                     return NotFound();
-
                 mapper.Map(quizDTO, quiz);
                 await quizRepo.SaveChangesAsync();
-
                 return NoContent();
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
                 return BadRequest("Verandering mislukt");
-
             }
         }
 
@@ -129,21 +115,16 @@ namespace API.Controllers
             try
             {
                 var quiz = await quizRepo.GetAsync(id);
-
                 if (quiz == null)
                     return NotFound();
-
                 quizRepo.Delete(quiz);
-
                 await quizRepo.SaveChangesAsync();
-
                 return NoContent();
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
                 return BadRequest("Verwijderen mislukt");
-
             }
         }
     }

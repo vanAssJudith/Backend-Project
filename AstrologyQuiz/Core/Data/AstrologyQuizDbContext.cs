@@ -14,7 +14,6 @@ namespace Core.Data
         {
 
         }
-
         public virtual DbSet<Quiz> Quizzen { get; set; }
         public virtual DbSet<QuizGebruiker> QuizGebruikers { get; set; }
         public virtual DbSet<Antwoord> Antwoorden { get; set; }
@@ -23,20 +22,15 @@ namespace Core.Data
         public virtual DbSet<QuizGebruikerAntwoord> QuizGebruikerAntwoorden { get; set; }
         public virtual DbSet<Vraag> Vragen { get; set; }
 
-
-        // fluent api 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             base.OnModelCreating(modelbuilder);
-
             modelbuilder.Seed();
-
             modelbuilder.Entity<QuizGebruikerAntwoord>(entity =>
             {
                 entity.HasKey(e => new { e.QuizGebruikerId, e.AntwoordId });
                 entity.HasOne(e => e.QuizGebruiker).WithMany(q => q.QuizGebruikerAntwoorden).OnDelete(DeleteBehavior.Restrict);
             });
-
         }
     }
 }

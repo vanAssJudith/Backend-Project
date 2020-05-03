@@ -22,6 +22,5 @@ namespace Core.Models
             this.Vragen = new Collection<Vraag>();
             this.QuizGebruikers = new Collection<QuizGebruiker>();
         }
-
     }
 }

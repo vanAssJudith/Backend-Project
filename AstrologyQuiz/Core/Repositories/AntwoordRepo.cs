@@ -24,7 +24,6 @@ namespace Core.Repositories
                .Include(v => v.Vraag)
                .ToListAsync();
         }
-
         
         public async Task<IEnumerable<Antwoord>> GetJuisteAntwoord(Guid id)
         {
@@ -35,15 +34,6 @@ namespace Core.Repositories
                 .Where(a => a.Vraag.QuizId == id)
                 .ToListAsync()
                 ;
-
-            // include 
-            // parent tabel -- child tabel
-            // thenincludde
-            // childe --> deeper child
-
-            // where = lijst die voldoet aan eisen binnen tabel en navigation property
-            // any = lijst (vaak in where method = kijkt of er een of meerdere voloden aan de eisen)
-            // singleOrdefault && fristordefault && last or default = GEEFT 1 OBJECT terug
         }
     }
 }

@@ -30,7 +30,6 @@ namespace Core.Services
         public async Task<bool> Login(Login login)
         {
             var result = await signInManager.PasswordSignInAsync(login.UserName, login.Password, false, lockoutOnFailure: false);
-
             return true;
         }
 
@@ -42,7 +41,6 @@ namespace Core.Services
             if (userClaims.Count == 0)
             {
                 var roles = await userManager.GetRolesAsync(gebruiker);
-
                 foreach (var role in roles)
                 {
                     var claim = new Claim(ClaimTypes.Role, role);
@@ -53,20 +51,17 @@ namespace Core.Services
             userClaims.Add(new Claim(JwtRegisteredClaimNames.Sub, name));
             userClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
 
-            //3. Sigin credentials met de symmetric key & encryptie methode
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Tokens:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256); //key en protocol
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            //4. aanmaken van het token
             var token = new JwtSecurityToken(
-             issuer: configuration["Tokens:Issuer"],  //onze website
-             audience: configuration["Tokens:Audience"],//gebruikers
+             issuer: configuration["Tokens:Issuer"],
+             audience: configuration["Tokens:Audience"],
              claims: userClaims,
              expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(configuration["Tokens: Expires"])),
-             signingCredentials: creds //controleert token v
+             signingCredentials: creds
              );
 
-            //5. user info returnen (vervaldatum als additionele info)
             return new BearerToken
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token), //token generator

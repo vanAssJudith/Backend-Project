@@ -34,16 +34,13 @@ namespace Web.Controllers
             this.logger = logger;
             this.quizRepo = quizRepo;
         }
-        // TODO Task niet vergeten
 
         public async Task<IActionResult> Index()
         {
             try
             {
                 var quizzen = await this.quizRepo.GetAllAsync();
-
                 return View(quizzen);
-
             }
             catch (Exception ex)
             {
@@ -57,7 +54,6 @@ namespace Web.Controllers
             try
             {
                 var quiz = await this.quizRepo.GetAsync(id);
-
                 return View(quiz);
             }
             catch (Exception ex)
@@ -65,7 +61,6 @@ namespace Web.Controllers
                 logger.LogError(ex.Message);
                 return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
             }
-
         }
 
         [HttpPost]
@@ -75,10 +70,7 @@ namespace Web.Controllers
             try
             {
                 var gebruiker = await _userManager.GetUserAsync(User);
-
-                // 1 lijst met aanwoorden overlopen en en nieuw object QuizGebruikerAntwoord
                 var quizGebruiker = await quizService.SaveQuizGebruikerAsync(antwoorden, id, gebruiker.Id);
-
                 return RedirectToAction(nameof(Score), new { id = quizGebruiker.Id });
             }
             catch (Exception ex)
@@ -86,27 +78,21 @@ namespace Web.Controllers
                 logger.LogError(ex.Message);
                 return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
             }
-
         }
-
 
         public async Task<IActionResult> Score(Guid id)
         {
             try
             {
                 var quizGebruiker = await quizGebruikerRepo.GetAsync(id);
-
                 var resultaatVM = new ResultaatVM()
                 {
                     QuizGebruikerAntwoorden = quizGebruiker.QuizGebruikerAntwoorden,
                     Vragen = quizGebruiker.Quiz.Vragen,
                     Score = quizGebruiker.TotaalScore,
                     QuizId = quizGebruiker.QuizId
-
                 };
-
                 return View(resultaatVM);
-
             }
             catch (Exception ex)
             {
@@ -115,15 +101,12 @@ namespace Web.Controllers
             }
         }
 
-
         public async Task<IActionResult> NieuweQuiz()
         {
             try
             {
                 var test = await moeilijkheidsGraadRepo.GetAllAsync();
                 ViewBag.MoeilijkheidsgraadId = new SelectList(test,"Id","Titel");
-
-
                 return View();
             }
             catch (Exception ex)
@@ -141,7 +124,6 @@ namespace Web.Controllers
             {
                 quizRepo.Add(quiz);
                 await quizRepo.SaveChangesAsync();
-
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -149,7 +131,6 @@ namespace Web.Controllers
                 logger.LogError(ex.Message);
                 return View("Error", new ErrorViewModel() { RequestId = HttpContext.TraceIdentifier });
             }
-
         }
 
         public async Task<IActionResult> TopScores()

@@ -32,11 +32,8 @@ namespace Core.Services
             }
 
             var juisteAntwoordenVanQuiz = await antwoordRepo.GetJuisteAntwoord(id) as List<Antwoord>;
-
             var juisteAntwoorden = juisteAntwoordenVanQuiz.Where(a => antwoorden.Any(an => an == a.Id));
-
             var totaalScore = juisteAntwoorden.Sum(a => a.Vraag.Score);
-
             var quizGebruiker = new QuizGebruiker()
             {
                 QuizId = id,
@@ -45,12 +42,9 @@ namespace Core.Services
                 StartDatum = DateTime.Now,
                 TotaalScore = totaalScore
             };
-
             quizRepo.AddQuizToGebruiker(quizGebruiker);
             await quizRepo.SaveChangesAsync();
             return quizGebruiker;
-
         }
-
     }
 }

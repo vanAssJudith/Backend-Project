@@ -9,7 +9,6 @@ namespace API.DTOs
     {
         public int Id { get; set; }
         public string Titel { get; set; }
-
         public virtual ICollection<QuizDTO> Quiz { get; set; }
     }
 }

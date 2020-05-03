@@ -50,7 +50,5 @@ namespace Core.Repositories
                 .Take(getal)
                 .ToListAsync();
         }
-
-       
     }
 }

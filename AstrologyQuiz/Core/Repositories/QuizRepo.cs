@@ -38,6 +38,5 @@ namespace Core.Repositories
         {
             context.QuizGebruikers.Add(quizGebruiker);
         }
-
     }
 }

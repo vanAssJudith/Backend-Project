@@ -22,6 +22,7 @@ namespace API.Controllers
             this.authentiecatieService = authentiecatieService;
             this.logger = logger;
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(Login login)
         {
@@ -30,16 +31,12 @@ namespace API.Controllers
                 if (!await authentiecatieService.Login(login))
                 {
                     return BadRequest("Credentials are not correct");
-
                 }
-
                 var token = await authentiecatieService.GenerateJWT(login.UserName);
                 return Ok(token);
-
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

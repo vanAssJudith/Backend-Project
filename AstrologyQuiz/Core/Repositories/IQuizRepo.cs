@@ -7,8 +7,6 @@ namespace Core.Repositories
 {
     public interface IQuizRepo:IGenericRepo<Quiz>
     {
-      
         void AddQuizToGebruiker(QuizGebruiker quizGebruiker);
-      
     }
 }

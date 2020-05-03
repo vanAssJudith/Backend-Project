@@ -13,7 +13,6 @@ namespace Core.Models
         public string AfbeeldingURL { get; set; }
         public bool IsCorrect { get; set; }
         public string Uitleg { get; set; }
-
         public Vraag Vraag { get; set; }
         public virtual ICollection<QuizGebruikerAntwoord> QuizGebruikerAntwoorden { get; set; }
         public Antwoord()

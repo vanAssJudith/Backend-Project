@@ -15,7 +15,6 @@ namespace API.DTOs
         public int MoeilijkheidsgraadId { get; set; }
         [Required]
         public string Beschrijving { get; set; }
-
         public virtual ICollection<VraagDTO> Vragen { get; set; }
     }
 }

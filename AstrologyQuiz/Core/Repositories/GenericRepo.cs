@@ -16,11 +16,11 @@ namespace Core.Repositories
         {
             this.context = context;
         }
-
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await context.Set<TEntity>().ToListAsync();
         }
+
         public virtual async Task<TEntity> GetAsync(Guid id)
         {
             return await context.Set<TEntity>().FindAsync(id);

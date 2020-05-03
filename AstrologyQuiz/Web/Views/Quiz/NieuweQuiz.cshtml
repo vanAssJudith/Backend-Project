@@ -23,20 +23,18 @@
                 <label asp-for="Beschrijving" class="control-label">Beschrijving Quiz</label>
                 <input asp-for="Beschrijving" class="form-control" />
             </div>
-
         </div>
         <hr class="c-streep" />
 
         <div class="js-vragen">
 
-
-
         </div>
-        <button class="c-btn" id="vraag-js" type="button">Voeg een nieuwe vraag toe</button>
+        <div class="c-btn">
+            <button class="c-btn--nieuwevraag" id="vraag-js" type="button">Voeg een nieuwe vraag toe</button>
+        </div>
 
-
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
+        <div class="c-btn">
+            <input type="submit" value="Voeg de quiz toe" class="c-btn--self" />
         </div>
     </form>
 </div>
@@ -63,6 +61,38 @@
     .c-streep {
         margin: 60px 0 60px 0;
     }
+
+    .c-btn {
+        display:flex;
+        justify-content:center;
+        margin: 44px;
+    }
+
+    .c-btn--self{
+        background-color: #DF691A;
+        color: #2B3E50;
+        cursor: pointer;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        padding: 1rem 1rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .c-btn--self:hover{
+        color: white;
+        text-decoration: none;
+    }
+
+    .c-btn--nieuwevraag{
+        color: #DF691A;
+        border: none;
+        background: none;
+        text-decoration: underline;
+    }
 </style>
 
 
@@ -74,11 +104,9 @@
         var btnAddVraag = document.getElementById("vraag-js");
         var vraagCounter = 0;
         var vraagContainer = document.querySelector(".js-vragen");
-
         if (vraagContainer)
             vraagToevoegen();
         btnAddVraag.addEventListener("click", vraagToevoegen)
-
         function vraagToevoegen() {
             console.log("vraag toevoegen");
             var vraag = `
@@ -103,13 +131,10 @@
                     ${genereerAntwoord(3)}
 
                     <hr class="c-streep" />`
-
             const vraagDiv = document.createElement("div");
             vraagDiv.innerHTML = vraag;
             vraagContainer.appendChild(vraagDiv);
             vraagCounter++;
-
-
         }
         function genereerAntwoord(antwoordCounter) {
 
@@ -128,17 +153,13 @@
                                     <label for="vragen-${vraagCounter}-uitleg-${antwoordCounter}" class="control-label">Uitleg</label>
                                     <input name="Vragen[${vraagCounter}].Antwoorden[${antwoordCounter}].Uitleg" id="vragen-${vraagCounter}-uitleg-${antwoordCounter}" class="form-control" placeholder="Uitleg" />
                                 </div>
+                                <div class="c-input--moeilijkheidsgraad">
+                                    <label for="vragen-${vraagCounter}-afbeeldingURL-${antwoordCounter}" class="control-label">Afbeelding</label>
+                                    <input name="Vragen[${vraagCounter}].Antwoorden[${antwoordCounter}].AfbeeldingURL" id="vragen-${vraagCounter}-afbeeldingURL-${antwoordCounter}" class="form-control" placeholder="afbeelding" />
+                                </div>
                             </div>
-
                     `
-
             return antwoord;
         }
-
-
-
-
     </script>
-
-
 }

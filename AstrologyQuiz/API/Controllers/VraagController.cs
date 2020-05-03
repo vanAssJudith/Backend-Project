@@ -36,9 +36,7 @@ namespace API.Controllers
             try
             {
                 var vragen = await vraagRepo.GetAllAsync();
-
                 var vragenDTO = mapper.Map<IEnumerable<VraagDTO>>(vragen);
-
                 return Ok(vragenDTO);
             }
             catch (Exception ex)
@@ -46,7 +44,6 @@ namespace API.Controllers
                 logger.LogError(ex.Message);
                 return BadRequest();
             }
-
         }
 
         // GET: api/Vraag/5
@@ -56,15 +53,12 @@ namespace API.Controllers
             try
             {
                 var vraag = await vraagRepo.GetAsync(id);
-
                 var vraagDTO = mapper.Map<VraagDTO>(vraag);
-
                 return Ok(vraagDTO);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-
                 return BadRequest();
             }
         }
@@ -75,20 +69,16 @@ namespace API.Controllers
         {
             try
             {
-
                 var vraag = mapper.Map<Vraag>(saveVraagDTO);
                 vraagRepo.Add(vraag);
                 await vraagRepo.SaveChangesAsync();
-
                 var vraagDTO = mapper.Map<VraagDTO>(vraag);
-
                 return CreatedAtAction(nameof(GetById), new { id = vraag.Id }, vraagDTO);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
                 return BadRequest("Toevoegen mislukt");
-
             }
         }
 
@@ -101,20 +91,16 @@ namespace API.Controllers
                 if (id != saveVraagDTO.Id)
                     return BadRequest("Id's kloppen niet");
                 var vraag = await vraagRepo.GetAsync(saveVraagDTO.Id);
-
                 if (vraag == null)
                     return NotFound();
-
                 mapper.Map(saveVraagDTO, vraag);
                 await vraagRepo.SaveChangesAsync();
-
                 return NoContent();
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
                 return BadRequest("Verandering mislukt");
-
             }
         }
 
@@ -125,21 +111,16 @@ namespace API.Controllers
             try
             {
                 var vraag = await vraagRepo.GetAsync(id);
-
                 if (vraag == null)
                     return NotFound();
-
                 vraagRepo.Delete(vraag);
-
                 await vraagRepo.SaveChangesAsync();
-
                 return NoContent();
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
                 return BadRequest("Verwijderen mislukt");
-
             }
         }
     }

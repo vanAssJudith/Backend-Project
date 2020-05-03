@@ -29,7 +29,6 @@
             @Html.DisplayFor(model => model.Moeilijkheidsgraad.Titel)
         </dd>
     </dl>
-
     <h2>Vragen</h2>
     <form class="c-quiz__vragen" method="post" asp-action="speel">
         @for (int i = 0; i < Model.Vragen.Count; i++)
@@ -38,26 +37,33 @@
             <div>
                 <div class="c-quiz__vraag">
                     <div class="c-quiz__vraag--titel">@vraag.Titel </div>
-                    <div class="c-quiz__vraag--vraag">@vraag.Beschrijving</div>
-                    <div>
+                        @if (vraag.Beschrijving != null)
+                        {
+                            <div class="c-quiz__vraag--vraag">@vraag.Beschrijving</div>
+                        }
                         @if (vraag.AfbeeldingURL != null)
                         {
                             <img class="c-quiz__vraag--img" src="~/images/@vraag.AfbeeldingURL" alt="afbeelding van @vraag.Titel" />
+                          
                         }
-                        </div>
-                </div>
+                    </div>
                 <div class="c-quiz__antwoorden">
                     @foreach (var antwoord in vraag.Antwoorden)
                     {
                         <input class="c-quiz__radiobtn" type="radio" value="@antwoord.Id" name="antwoorden[@i]" id="@antwoord.Id"/>
                         <label class="c-quiz__antwoord" for="@antwoord.Id">
-                            <span>@antwoord.Omschrijving</span>
-                            @if (antwoord.AfbeeldingURL != null)
-                            {
-                                <img class="c-quiz__antwoord-img" src="~/images/@antwoord.AfbeeldingURL" alt="afbeelding van @antwoord.Omschrijving" />
+                                @if (antwoord.Omschrijving != null)
+                                {
+                                    <span>@antwoord.Omschrijving</span>
+                                }
+                                @if (antwoord.AfbeeldingURL != null)
+                                {
+                                    <div class="c-quiz__antwoord-imgkader">
+                                        <img class="c-quiz__antwoord-img" src="~/images/@antwoord.AfbeeldingURL" alt="afbeelding van @antwoord.Omschrijving" />
+                                    </div>
 
-                            }
-                        </label>
+                                }
+                            </label>
                     }
                 </div>
             </div>
@@ -67,7 +73,6 @@
             <button class="c-btn--self">Antwoorden indienen</button>
         </div>
     </form>
-
 </div>
 
 <style >
@@ -135,6 +140,15 @@
         font-size: 16px;
     }
 
+    .c-quiz__antwoord-imgkader{
+        display:flex;
+        justify-content:center;
+    }
+
+    .c-quiz__antwoord-img{
+        width: 200px;
+    }
+
     .c-streep{
         margin: 80px 0 80px 0;
     }
@@ -163,6 +177,4 @@
         color: white;
         text-decoration: none;
     }
-
-
 </style>

@@ -9,6 +9,5 @@ namespace Core.Repositories
     public interface IQuizGebruikerRepo:IGenericRepo<QuizGebruiker>
     {
         Task<IEnumerable<QuizGebruiker>> GetTopScore(int getal, Guid quizId);
-
     }
 }
