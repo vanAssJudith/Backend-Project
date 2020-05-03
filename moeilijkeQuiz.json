@@ -1,0 +1,388 @@
+{
+    "Onderwerp": "Astrologie",
+    "MoeilijkheidsgraadId": 3,
+    "Beschrijving": "Dit is een quiz over astrologie.",
+ 
+    "Vragen" :[
+       {
+     "Titel" : "Horoscoop",
+     "Beschrijving" : "Wie probeerde als eerste horoscopen van individuen vanaf de geboorte te traceren?",
+     "AfbeeldingURL" : "vraag1.jpg",
+     "Score" : 1,
+ 
+     "Antwoorden":[
+         {
+        "Omschrijving" : "De Chinezen",
+        "AfbeeldingURL" : null,
+        "IsCorrect" : false,
+        "Uitleg" : "Dit is fout"
+ 
+     },
+     {
+        "Omschrijving" : "De Romeinen",
+        "AfbeeldingURL" : null,
+        "IsCorrect" : false,
+        "Uitleg" : "Dit is fout"
+ 
+     },{
+        "Omschrijving" : "De Babyloniërs",
+        "AfbeeldingURL" : null,
+        "IsCorrect" : false,
+        "Uitleg" : "Dit is fout"
+ 
+     },{
+        "Omschrijving" : "De Grieken",
+        "AfbeeldingURL" : null,
+        "IsCorrect" : true,
+        "Uitleg" : "Dit is zo"
+ 
+     }
+    
+    
+    ]
+    },
+ 
+ 
+    {
+        "Titel" : "Astroloog",
+        "Beschrijving" : "Welke populaire Amerikaanse astroloog werd in 1914 gearresteerd en beschuldigd van illegale waarzeggerij?",
+        "AfbeeldingURL" : "vraag2.jpg",
+        "Score" : 1,
+        "Antwoorden":[
+            {
+           "Omschrijving" : "Evangeline Adams",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : true,
+           "Uitleg" : "Dit is zo"
+   
+        },
+        {
+           "Omschrijving" : "Louisa Matthews",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+   
+        },{
+           "Omschrijving" : "Madeleine Rose",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+   
+        },{
+           "Omschrijving" : "Josephine Wilson",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+   
+        }
+       
+       
+       ]
+       },
+ 
+    {
+       "Titel" : "Denemarken",
+       "Beschrijving" : "Wie was in de 16e eeuw de koninklijke astronoom van Denemarken?",
+       "AfbeeldingURL" : "vraag3.jpg",
+       "Score" : 1,
+ 
+       "Antwoorden":[
+         {
+        "Omschrijving" : "William Herschel",
+        "AfbeeldingURL" : null,
+        "IsCorrect" : false,
+        "Uitleg" : "Dit is fout"
+ 
+       },
+       {
+          "Omschrijving" : "Tycho Brahe",
+          "AfbeeldingURL" : null,
+          "IsCorrect" : true,
+          "Uitleg" : "Dit is zo"
+ 
+       },{
+          "Omschrijving" : "Gustavus Adolphus",
+          "AfbeeldingURL" : null,
+          "IsCorrect" : false,
+          "Uitleg" : "Dit is fout"
+ 
+       },{
+          "Omschrijving" : "Johannes Kepler",
+          "AfbeeldingURL" : null,
+          "IsCorrect" : false,
+          "Uitleg" : "Dit is fout"
+ 
+       }
+    
+    
+    ]
+    },
+
+    {
+        "Titel" : "Jongste sterrenbeeld",
+        "Beschrijving" : "Welk sterrenbeeld staat bekend als het jongste sterrenbeeld?",
+        "AfbeeldingURL" : "vraag4.jpg",
+        "Score" : 1,
+  
+        "Antwoorden":[
+          {
+         "Omschrijving" : "Boogschutter",
+         "AfbeeldingURL" : null,
+         "IsCorrect" : false,
+         "Uitleg" : "Dit is fout"
+  
+        },
+        {
+           "Omschrijving" : "Leeuw",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Ram",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : true,
+           "Uitleg" : "Dit is zo"
+  
+        },{
+           "Omschrijving" : "Stier",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        }
+     
+     
+     ]
+     },
+
+     {
+        "Titel" : "Neptunus",
+        "Beschrijving" : "Welk sterrenbeeld wordt geregeerd door Neptunus?",
+        "AfbeeldingURL" : "vraag5.jpg",
+        "Score" : 1,
+  
+        "Antwoorden":[
+          {
+         "Omschrijving" : "Waterman",
+         "AfbeeldingURL" : null,
+         "IsCorrect" : false,
+         "Uitleg" : "Dit is fout"
+  
+        },
+        {
+           "Omschrijving" : "Boogschutter",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Vissen",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : true,
+           "Uitleg" : "Dit is zo"
+  
+        },{
+           "Omschrijving" : "Weegschaal",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        }
+     
+     
+     ]
+     },
+
+     {
+        "Titel" : "Tweeling",
+        "Beschrijving" : "Wat zijn de namen van de tweeling die geassocieerd is met het astrologische teken Tweeling?",
+        "AfbeeldingURL" : "vraag6.jpg",
+        "Score" : 1,
+  
+        "Antwoorden":[
+          {
+         "Omschrijving" : "Jupiter en Apollo",
+         "AfbeeldingURL" : null,
+         "IsCorrect" : false,
+         "Uitleg" : "Dit is fout"
+  
+        },
+        {
+           "Omschrijving" : "Eng en Chang",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Romulus en Remus",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : true,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Castor en Pollux",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : true,
+           "Uitleg" : "Dit is zo"
+  
+        }
+     
+     
+     ]
+     },
+
+     {
+        "Titel" : "De grote cirkels",
+        "Beschrijving" : "Wat is niet een van de drie 'grote cirkels' die astrologen gebruiken?",
+        "AfbeeldingURL" : "vraag7.jpg",
+        "Score" : 1,
+  
+        "Antwoorden":[
+          {
+         "Omschrijving" : "Evenaar",
+         "AfbeeldingURL" : null,
+         "IsCorrect" : false,
+         "Uitleg" : "Dit is fout"
+  
+        },
+        {
+           "Omschrijving" : "Elliptisch",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Horizon",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Orbital",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : true,
+           "Uitleg" : "Dit is zo"
+  
+        }
+     
+     
+     ]
+     },
+
+     {
+        "Titel" : "Vissen",
+        "Beschrijving" : "Wat is de geluksdag van het astrologische teken Vissen?",
+        "AfbeeldingURL" : "vraag8.jpg",
+        "Score" : 1,
+  
+        "Antwoorden":[
+          {
+         "Omschrijving" : "Zaterdag",
+         "AfbeeldingURL" : null,
+         "IsCorrect" : false,
+         "Uitleg" : "Dit is fout"
+  
+        },
+        {
+           "Omschrijving" : "Vrijdag",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : true,
+           "Uitleg" : "Dit is zo"
+  
+        },{
+           "Omschrijving" : "Maandag",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Woensdag",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        }
+     
+     
+     ]
+     },
+
+     {
+        "Titel" : "Boom",
+        "Beschrijving" : "Met welke boom wordt het astrologische teken Leo geassocieerd?",
+        "AfbeeldingURL" : "vraag9.jpg",
+        "Score" : 1,
+  
+        "Antwoorden":[
+          {
+         "Omschrijving" : "Appel",
+         "AfbeeldingURL" : null,
+         "IsCorrect" : false,
+         "Uitleg" : "Dit is fout"
+  
+        },
+        {
+           "Omschrijving" : "Citrus",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : true,
+           "Uitleg" : "Dit is zo"
+  
+        },{
+           "Omschrijving" : "Noot",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Den",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        }
+     
+     
+     ]
+     },
+
+     {
+        "Titel" : "Vrouwelijk sterrenbeeld",
+        "Beschrijving" : "Welke van de volgende is een vrouwelijk sterrenbeeld?",
+        "AfbeeldingURL" : "vraag10.jpg",
+        "Score" : 1,
+  
+        "Antwoorden":[
+          {
+         "Omschrijving" : "Stier",
+         "AfbeeldingURL" : null,
+         "IsCorrect" : true,
+         "Uitleg" : "Dit is zo"
+  
+        },
+        {
+           "Omschrijving" : "Weegschaal",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Waterman",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        },{
+           "Omschrijving" : "Tweeling",
+           "AfbeeldingURL" : null,
+           "IsCorrect" : false,
+           "Uitleg" : "Dit is fout"
+  
+        }
+     
+     
+     ]
+     }
+ 
+    ]
+ }

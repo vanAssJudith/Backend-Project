@@ -9,37 +9,62 @@
 <div class="c-form">
     <form asp-action="NieuweQuiz" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Onderwerp" class="control-label">Onderwerp Quiz</label>
-            <input asp-for="Onderwerp" class="form-control" />
+        <div class="c-input">
+            <div class="c-input--onderwerp">
+                <label asp-for="Onderwerp" class="control-label">Onderwerp Quiz</label>
+                <input asp-for="Onderwerp" class="form-control" />
+            </div>
+            @ViewBag.Name
+            <div class="c-input--moeilijkheidsgraad">
+                <label asp-for="MoeilijkheidsgraadId" class="control-label">Moeilijkheidsgraad</label>
+                <select asp-for="MoeilijkheidsgraadId" class="form-control" asp-items="ViewBag.MoeilijkheidsgraadId"></select>
+            </div>
+            <div class="c-input--beschrijving">
+                <label asp-for="Beschrijving" class="control-label">Beschrijving Quiz</label>
+                <input asp-for="Beschrijving" class="form-control" />
+            </div>
+
         </div>
-        @ViewBag.Name
-        <div class="form-group">
-            <label asp-for="MoeilijkheidsgraadId" class="control-label">Moeilijkheidsgraad</label>
-            <select asp-for="MoeilijkheidsgraadId" class="form-control" asp-items="ViewBag.MoeilijkheidsgraadId"></select>
-        </div>
+        <hr class="c-streep" />
 
 
         @for (int i = 0; i < 10; i++)
         {
-            <div class="form-group">
-                <label asp-for="@Model.Vragen.ToList()[0].Titel" class="control-label">Nieuwe vraag</label>
-                <input name="Vragen[@i].Titel" class="form-control" placeholder="Vraag"/>
+            <div class="c-input">
+                <div class="c-input--onderwerp">
+                    <label asp-for="@Model.Vragen.ToList()[0].Titel" class="control-label">Onderwerp vraag</label>
+                    <input name="Vragen[@i].Titel" class="form-control" placeholder="Onderwerp" />
+                </div>
+                <div class="c-input--beschrijving">
+                    <label asp-for="@Model.Vragen.ToList()[0].Beschrijving" class="control-label">Nieuwe vraag</label>
+                    <input name="Vragen[@i].Beschrijving" class="form-control" placeholder="Vraag" />
+                </div>
+                <div class="c-input--moeilijkheidsgraad">
+                    <label asp-for="@Model.Vragen.ToList()[0].AfbeeldingURL" class="control-label">Afbeelding</label>
+                    <input name="Vragen[@i].AfbeeldingURL" class="form-control" placeholder="afbeelding" />
+                </div>
             </div>
 
             <div>
                 @for (int y = 0; y < 4; y++)
                 {
-                <div class="form-group">
-                    <label for="vragen-@i-antwoord-@y" class="control-label">Antwoord</label>
-                    <input name="Vragen[@i].Antwoorden[@y].Omschrijving" id="vragen-@i-antwoord-@y" class="form-control" placeholder="Antwoord" />
-                    <label for="vragen-@i-antwoord-@y" class="control-label">Juist of fout</label>
-                    <input type="checkbox" name="Vragen[@i].Antwoorden[@y].IsCorrect" id="vragen-@i-antwoord-@y" class="form-control" />
-                    <label for="vragen-@i-antwoord-@y" class="control-label">Uitleg</label>
-                    <input name="Vragen[@i].Antwoorden[@y].Uitleg" id="vragen-@i-antwoord-@y" class="form-control" placeholder="uitleg" />
-                </div>
+                    <div class="c-input">
+                        <div class="c-input--onderwerp">
+                            <label for="vragen-@i-antwoord-@y" class="control-label">Antwoord</label>
+                            <input name="Vragen[@i].Antwoorden[@y].Omschrijving" id="vragen-@i-antwoord-@y" class="form-control" placeholder="Antwoord" />
+                        </div>
+                        <div>
+                            <label for="vragen-@i-antwoord-@y" class="control-label">Juist?</label>
+                            <input type="checkbox" name="Vragen[@i].Antwoorden[@y].IsCorrect" id="vragen-@i-antwoord-@y" class="form-control" />
+                        </div>
+                        <div class="c-input--beschrijving">
+                            <label for="vragen-@i-antwoord-@y" class="control-label">Uitleg</label>
+                            <input name="Vragen[@i].Antwoorden[@y].Uitleg" id="vragen-@i-antwoord-@y" class="form-control" placeholder="Uitleg" />
+                        </div>
+                    </div>
                 }
             </div>
+            <hr class="c-streep" />
         }
 
 
@@ -72,6 +97,30 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<style>
+    .c-input{
+        display:flex;
+        justify-content:space-between;
+        margin-bottom: 2rem;
+    }
+    .c-input--onderwerp{
+        width: 250px;
+    }
+
+    .c-input--moeilijkheidsgraad{
+        width: 160px;
+    }
+
+    .c-input--beschrijving{
+        width: 600px;
+    }
+
+    .c-streep{
+        margin: 60px 0 60px 0;
+    }
+</style>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

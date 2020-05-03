@@ -135,7 +135,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> NieuweQuiz([Bind("Onderwerp, MoelijkheidgraadId")]Quiz quiz)
+        public async Task<IActionResult> NieuweQuiz([Bind("Onderwerp, MoeilijkheidsgraadId, Beschrijving, Vragen")]Quiz quiz)
         {
             try
             {

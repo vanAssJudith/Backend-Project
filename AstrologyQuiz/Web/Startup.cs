@@ -51,7 +51,7 @@ namespace Web
                 .AddEntityFrameworkStores<AstrologyQuizDbContext>();
 
             services.AddControllersWithViews();
-            services.AddRazorPages();            
+            services.AddRazorPages();
         }
             
 

@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Score";
 }
-<h2>Uw score is @Model.Score op @Model.Vragen.Sum(v => v.Score)</h2>
+<div class="c-score">Uw score is @Model.Score op @Model.Vragen.Sum(v => v.Score)</div>
+<hr class="c-streep" />
 
 
 @foreach (var vraag in Model.Vragen)
@@ -22,10 +23,11 @@
                 <div class="c-antwoord--correct">Juiste antwoord</div>
             }
             <div class="c-uitleg">@antwoord.Uitleg</div>
-
         }
     </div>
+    <hr class="c-streep" />
 }
+
 
 <div class="c-topscore">
     @await Component.InvokeAsync("TopScores", new { aantal = 3, quizId = Model.QuizId })
@@ -82,7 +84,7 @@
     }
 
     .c-antwoord--selected {
-        color: yellow;
+        color: #DF691A;
         grid-column: 2;
         padding: 0.75rem;
     }
@@ -95,15 +97,22 @@
     }
 
     .c-score {
+        font-size: x-large;
+        font-weight: bolder;
+        color: #DF691A;
     }
 
     .pb-3,
     .py-3 {
-      padding-bottom: 1rem !important;
-      padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        padding-top: 1rem !important;
     }
 
-    .c-topscore{
+    .c-topscore {
         margin: 24px 0 24px 0;
+    }
+
+    .c-streep {
+        margin: 40px 0 40px 0;
     }
 </style>
