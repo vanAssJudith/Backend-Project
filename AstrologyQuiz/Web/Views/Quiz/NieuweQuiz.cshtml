@@ -27,45 +27,12 @@
         </div>
         <hr class="c-streep" />
 
+        <div class="js-vragen">
 
-        @for (int i = 0; i < 10; i++)
-        {
-            <div class="c-input">
-                <div class="c-input--onderwerp">
-                    <label asp-for="@Model.Vragen.ToList()[0].Titel" class="control-label">Onderwerp vraag</label>
-                    <input name="Vragen[@i].Titel" class="form-control" placeholder="Onderwerp" />
-                </div>
-                <div class="c-input--beschrijving">
-                    <label asp-for="@Model.Vragen.ToList()[0].Beschrijving" class="control-label">Nieuwe vraag</label>
-                    <input name="Vragen[@i].Beschrijving" class="form-control" placeholder="Vraag" />
-                </div>
-                <div class="c-input--moeilijkheidsgraad">
-                    <label asp-for="@Model.Vragen.ToList()[0].AfbeeldingURL" class="control-label">Afbeelding</label>
-                    <input name="Vragen[@i].AfbeeldingURL" class="form-control" placeholder="afbeelding" />
-                </div>
-            </div>
 
-            <div>
-                @for (int y = 0; y < 4; y++)
-                {
-                    <div class="c-input">
-                        <div class="c-input--onderwerp">
-                            <label for="vragen-@i-antwoord-@y" class="control-label">Antwoord</label>
-                            <input name="Vragen[@i].Antwoorden[@y].Omschrijving" id="vragen-@i-antwoord-@y" class="form-control" placeholder="Antwoord" />
-                        </div>
-                        <div>
-                            <label for="vragen-@i-antwoord-@y" class="control-label">Juist?</label>
-                            <input type="checkbox" name="Vragen[@i].Antwoorden[@y].IsCorrect" id="vragen-@i-antwoord-@y" class="form-control" />
-                        </div>
-                        <div class="c-input--beschrijving">
-                            <label for="vragen-@i-antwoord-@y" class="control-label">Uitleg</label>
-                            <input name="Vragen[@i].Antwoorden[@y].Uitleg" id="vragen-@i-antwoord-@y" class="form-control" placeholder="Uitleg" />
-                        </div>
-                    </div>
-                }
-            </div>
-            <hr class="c-streep" />
-        }
+
+        </div>
+        <button class="c-btn" id="vraag-js" type="button">Voeg een nieuwe vraag toe</button>
 
 
         <div class="form-group">
@@ -74,49 +41,26 @@
     </form>
 </div>
 
-<script>
- var counter = 1;
- var test =`<div class="form-group">
-                <label class="control-label" for="z0__Titel">Nieuwe vraag</label>
-                <input name="Vragen[2].Titel" class="form-control" placeholder="Vraag"/>
-            </div>
-            <div>
-                <div class="form-group">
-                    <label for="vragen-2-antwoord-0" class="control-label">Antwoord</label>
-                    <input name="Vragen[2].Antwoorden[0].Omschrijving" id="vragen-2-antwoord-0" class="form-control" placeholder="Antwoord" />
-                    <label for="vragen-2-antwoord-0" class="control-label">Juist of fout</label>
-                    <input type="checkbox" name="Vragen[2].Antwoorden[0].IsCorrect" id="vragen-2-antwoord-0" class="form-control" />
-                    <label for="vragen-2-antwoord-0" class="control-label">Uitleg</label>
-                    <input name="Vragen[2].Antwoorden[0].Uitleg" id="vragen-2-antwoord-0" class="form-control" placeholder="uitleg" />
-                </div>
-
-            </div>`
-
-
-</script>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 <style>
-    .c-input{
-        display:flex;
-        justify-content:space-between;
+    .c-input {
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 2rem;
     }
-    .c-input--onderwerp{
+
+    .c-input--onderwerp {
         width: 250px;
     }
 
-    .c-input--moeilijkheidsgraad{
+    .c-input--moeilijkheidsgraad {
         width: 160px;
     }
 
-    .c-input--beschrijving{
+    .c-input--beschrijving {
         width: 600px;
     }
 
-    .c-streep{
+    .c-streep {
         margin: 60px 0 60px 0;
     }
 </style>
@@ -124,4 +68,77 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+        var btnAddVraag = document.getElementById("vraag-js");
+        var vraagCounter = 0;
+        var vraagContainer = document.querySelector(".js-vragen");
+
+        if (vraagContainer)
+            vraagToevoegen();
+        btnAddVraag.addEventListener("click", vraagToevoegen)
+
+        function vraagToevoegen() {
+            console.log("vraag toevoegen");
+            var vraag = `
+
+                    <div class="c-input">
+                        <div class="c-input--onderwerp">
+                            <label for="vraag-${vraagCounter}-titel" class="control-label">Onderwerp vraag</label>
+                            <input name="Vragen[${vraagCounter}].Titel" id="vraag-${vraagCounter}-titel" class="form-control" placeholder="Onderwerp" />
+                        </div>
+                        <div class="c-input--beschrijving">
+                            <label for="vraag-${vraagCounter}-beschrijving" class="control-label">Nieuwe vraag</label>
+                            <input name="Vragen[${vraagCounter}].Beschrijving" id="vraag-${vraagCounter}-beschrijving" class="form-control" placeholder="Vraag" />
+                        </div>
+                        <div class="c-input--moeilijkheidsgraad">
+                            <label for="vraag-${vraagCounter}-afbeeldingURL" class="control-label">Afbeelding</label>
+                            <input name="Vragen[${vraagCounter}].AfbeeldingURL" id="vraag-${vraagCounter}-afbeeldingURL" class="form-control" placeholder="afbeelding" />
+                        </div>
+                    </div>
+                    ${genereerAntwoord(0)}
+                    ${genereerAntwoord(1)}
+                    ${genereerAntwoord(2)}
+                    ${genereerAntwoord(3)}
+
+                    <hr class="c-streep" />`
+
+            const vraagDiv = document.createElement("div");
+            vraagDiv.innerHTML = vraag;
+            vraagContainer.appendChild(vraagDiv);
+            vraagCounter++;
+
+
+        }
+        function genereerAntwoord(antwoordCounter) {
+
+            const antwoord = `
+
+                            <div class="c-input">
+                                <div class="c-input--onderwerp">
+                                    <label for="vragen-${vraagCounter}-antwoord-${antwoordCounter}" class="control-label">Antwoord</label>
+                                    <input name="Vragen[${vraagCounter}].Antwoorden[${antwoordCounter}].Omschrijving" id="vragen-${vraagCounter}-antwoord-${antwoordCounter}" class="form-control" placeholder="Antwoord" />
+                                </div>
+                                <div>
+                                    <label for="vragen-${vraagCounter}-isCorrect-${antwoordCounter}" class="control-label">Juist?</label>
+                                    <input type="checkbox" name="Vragen[${vraagCounter}].Antwoorden[${antwoordCounter}].IsCorrect" value="true" id="vragen-${vraagCounter}-isCorrect-${antwoordCounter}" class="form-control" />
+                                </div>
+                                <div class="c-input--beschrijving">
+                                    <label for="vragen-${vraagCounter}-uitleg-${antwoordCounter}" class="control-label">Uitleg</label>
+                                    <input name="Vragen[${vraagCounter}].Antwoorden[${antwoordCounter}].Uitleg" id="vragen-${vraagCounter}-uitleg-${antwoordCounter}" class="form-control" placeholder="Uitleg" />
+                                </div>
+                            </div>
+
+                    `
+
+            return antwoord;
+        }
+
+
+
+
+    </script>
+
+
 }

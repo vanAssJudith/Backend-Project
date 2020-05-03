@@ -37,9 +37,14 @@
             var vraag = Model.Vragen.ToList()[i];
             <div>
                 <div class="c-quiz__vraag">
-                    <div class="c-quiz__vraag--titel">@vraag.Titel: </div>
+                    <div class="c-quiz__vraag--titel">@vraag.Titel </div>
                     <div class="c-quiz__vraag--vraag">@vraag.Beschrijving</div>
-                    <div><img class="c-quiz__vraag--img" src="~/images/@vraag.AfbeeldingURL" alt="afbeelding van @vraag.Titel"/></div>
+                    <div>
+                        @if (vraag.AfbeeldingURL != null)
+                        {
+                            <img class="c-quiz__vraag--img" src="~/images/@vraag.AfbeeldingURL" alt="afbeelding van @vraag.Titel" />
+                        }
+                        </div>
                 </div>
                 <div class="c-quiz__antwoorden">
                     @foreach (var antwoord in vraag.Antwoorden)
